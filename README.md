@@ -1,5 +1,5 @@
 # react-zeolearn-jan-14-2019
-React JS training material for training from [Zeolearn](https://www.zeolearn.com/) (Jan 14 - Jan 29, 10:00 AM - 12:00 PM Central Time (US and Canada)) 
+React JS training material for training from [Zeolearn](https://www.zeolearn.com/)
 
 ## Exercises
 Please refer the [exercises document for exercises given during the training sessions](./exercises.md)
@@ -35,11 +35,6 @@ Redux is a state management library. It can be used with any framework or standa
 * Latest version of one of Chrome/Firefox (preferably Chrome). Internet Explorer is not acceptable.  
     - [Chrome](https://www.google.com/chrome/browser/desktop/index.html)
     - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-  
-## Training schedule
-__Topic__: React JS  
-__Dates__: Jan 14 - Jan 29 2019  
-__Time__: 10:00 AM - 12:00 PM Central Time (US and Canada)  
 
 ## How to join the meeting
 The training session are recorded using Zoom (https://zoom.us). If you are using Zoom for the first time you will be prompted to download Zoom when you open the meeting link in the browser. Do so and follow the steps in the wizard. Please check the mail ffrom Zeolearn for meeting link.  
