@@ -11,3 +11,14 @@ let days = [
 const [ first, second, , , fifth = 'Holiday', sixth = 'Holiday' ] = days;
 
 console.log( first, second, fifth, sixth );
+
+const mos = [
+  'January',
+  'February',
+  'March',
+  'April',
+]
+
+const [mo1, mo2] = mos
+
+console.log(mo1, mo2)
