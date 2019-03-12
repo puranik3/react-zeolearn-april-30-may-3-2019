@@ -14,4 +14,21 @@ for( let j = 0; j < 10; j++ ) { // let variables are block-scoped
 // console.log( 'outside loop, j = ', j );
 
 var x1 = 2; // ok!
-let x2 = 3; // not ok - redeclaration
+// let x2 = 3; // not ok - redeclaration
+
+if (true) {
+  let x = 1
+  var y = 3
+}
+
+// console.log(x) // not defined
+ console.log(y)
+
+function testing() {
+  let q = 'block-scoped'
+  var r = 'global-scoped'
+}
+
+// console.log(q) // not defined
+// console.log(r) // not defined
+// So with var functions contain their scope but for and if blocks do not.
