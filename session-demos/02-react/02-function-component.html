@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!-- React core -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+
+        <!-- ReactDOM does DOM rendering -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+
+        <!-- Babel to process script with JSX code (and also be confident of using ES6 features withut having to worry about browser support for them) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            // <Message text="Hello" /> => <h1>Hello</h1>
+            // Two ways to define components
+            // 1. Use a function (simple - cannot hold any state)
+            // 2. Define it using a class (complete - can have state)
+
+            function Message( props ) {
+                console.log( 'props = ', props );
+                return <h1>{props.text}</h1>;
+            }
+
+            const messageEl = <Message text="Hello" />;
+            ReactDOM.render( messageEl, document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>

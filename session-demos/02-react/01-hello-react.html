@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <!-- React core -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+
+        <!-- ReactDOM does DOM rendering -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+
+        <!-- Babel to process script with JSX code (and also be confident of using ES6 features withut having to worry about browser support for them) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            console.log( React );
+            console.log( ReactDOM );
+
+            const h1El = <h1 id="intro" title="Introduction to React">
+                Hello react
+                <div>React is created by Facebook</div>
+            </h1>;
+            
+            // const h1El = React.createElement(
+            //     'h1',
+            //     {
+            //         id: 'intro',
+            //         title: 'Introduction to React'
+            //     },
+            //     'Hello React',
+            //     React.createElement(
+            //         'div',
+            //         null,
+            //         'React is created by Facebook'
+            //     )
+            // );
+
+            console.log( h1El );
+
+            // React elements are immutable.
+            h1El.type = 'p';
+            h1El.props.push( 'New child of the h1' );
+
+            ReactDOM.render( h1El, document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>
