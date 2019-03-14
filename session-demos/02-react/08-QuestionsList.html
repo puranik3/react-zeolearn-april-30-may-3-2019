@@ -18,9 +18,14 @@
         <!-- Babel to process script with JSX code (and also be confident of using ES6 features withut having to worry about browser support for them) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
+        <!-- Axios library for for Ajax requests -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+
         <script type="text/babel">
             class QuestionList extends React.Component {
                 render() {
+                    console.log( this.props );
+                    
                     return (
                         <React.Fragment>
                             {
