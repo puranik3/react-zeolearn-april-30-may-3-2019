@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
         <div id="root"></div>
@@ -19,31 +20,105 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
         <script type="text/babel">
-            function Invoice( props ) {
-                console.log( props );
-                
-                // return [
-                //     <h1>Invoice</h1>,
-                //     <hr />
-                // ];
+            class Invoice extends React.Component {
+                constructor( props ) {
+                    super( props );
 
-                // return (
-                //     <div>
-                //         <h1>Invoice</h1>
-                //         <hr />
-                //     </div>
-                // )
+                    this.state = {
+                        items: this.props.items
+                    };
+                }
 
-                return (
-                    <React.Fragment>
-                        <h1>Invoice</h1>
-                        <hr />
-                        Date: {props.invoiceDate.toDateString()}
-                        {[ <span>Span1</span>, <span>Span2</span>]}
-                    </React.Fragment>
-                );
+                deleteItem = ( item, event ) => {
+                    console.log( 'event = ', event );
+                    console.log( event.clientX, event.clientY );
+                    console.log( 'item = ', item.name );
+
+                    this.setState({
+                        items: this.state.items.filter( i => i !== item )
+                    });
+                }
+
+                getLineItems() {
+                    const props = this.props;
+                    const state = this.state;
+
+                    return state.items.map((item) => 
+                        <tr key={item.name}>
+                            <td>{item.name}</td>
+                            <td>{item.quantity}</td>
+                            <td>{item.price}</td>
+                            <td>{item.quantity * item.price}</td>
+                            <td><button className="btn btn-outline-danger" onClick={this.deleteItem.bind( null, item )}>Delete</button></td>
+                        </tr>
+                    );
+                }
+
+                getDiscountLine() {
+                    const props = this.props;
+
+                    if( props.discountPercentage === 0 ) {
+                        return null;
+                    } else {
+                        return (
+                            <div className="alert alert-success">
+                                Your are eligible for a discount of {props.discountPercentage}% on your next purchase.
+                            </div>
+                        );
+                    }
+                }
+
+                render() {
+                    const props = this.props;
+                    const state = this.state;
+                    // return [
+                    //     <h1>Invoice</h1>,
+                    //     <hr />
+                    // ];
+
+                    // return (
+                    //     <div>
+                    //         <h1>Invoice</h1>
+                    //         <hr />
+                    //     </div>
+                    // )
+
+                    const mainHeadingStyle = { color: 'crimson', fontSize: '1.5em' };
+                    const subHeadingStyle = { ...mainHeadingStyle, fontSize: '1.2em' };
+
+                    return (
+                        <React.Fragment>
+                            <div className="container">
+                                <h1 style={mainHeadingStyle}>Invoice</h1>
+                                <hr />
+                                {this.getDiscountLine()}
+                                Date: {props.invoiceDate.toDateString()}
+                                <table className="table table-bordered table-striped">
+                                    <thead className="thead-dark">
+                                        <tr>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.getLineItems()}
+                                        <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{state.items.reduce((total, line) => total + line.quantity * line.price, 0)}</td>
+                                        <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </React.Fragment>
+                    );
+                }
             }
-
 
             const invoiceProps = {
                 invoiceDate: new Date( 2019, 2, 15 ),
@@ -57,7 +132,10 @@
             };
             
             ReactDOM.render( 
-                <Invoice {...invoiceProps} />,
+                [
+                    <Invoice {...invoiceProps} key="invoice-1" />,
+                    <Invoice {...invoiceProps} discountPercentage={0} key="invoice-2" />
+                ],
                 document.getElementById( 'root' )
             );
         </script>
