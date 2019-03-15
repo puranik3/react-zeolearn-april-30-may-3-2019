@@ -7,8 +7,16 @@
         <title>Document</title>
         <style>
             .panel { border: 1px solid crimson; border-radius: 5px; margin: 0 10px 10px;}
-            .panel-heading, .panel-body { padding: 10px; margin: 0;}
-            .panel-heading { background-color: lightpink; }
+            .panel-heading, .panel-body { margin: 0; }
+            .panel-heading { background-color: lightpink; overflow: hidden; padding: 10px}
+            .panel-body {
+              overflow: scroll;
+              transition-property: height, margin;
+              transition-duration: 0.5s;
+              transition-timing-function: ease-in-out;
+            }
+            .panel-body.open { margin: 10px; height: 200px;}
+            .panel-body.closed { margin: 0; height: 0 }
         </style>
     </head>
     <body>
@@ -41,8 +49,9 @@
           }
 
           function PanelBody( props ) {
+            const className = props.id === String(props.openEl) ? 'open' : 'closed'
             return(
-              <div className='panel-body' style={{ display: props.id === String(props.openEl) ? 'block' : 'none' }}>{props.children}</div>
+              <div className={`panel-body ${className}`}>{props.children}</div>
             )
           }
 
