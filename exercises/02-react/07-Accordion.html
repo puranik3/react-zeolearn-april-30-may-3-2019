@@ -51,7 +51,7 @@
           function PanelBody( props ) {
             const className = props.id === String(props.openEl) ? 'open' : 'closed'
             return(
-              <div className={`panel-body ${className}`}>{props.children}</div>
+              <div className={"panel-body " + className}>{props.children}</div>
             )
           }
 
@@ -80,6 +80,14 @@
                   })}
                 </div>
               )
+            }
+
+            shouldComponentUpdate(nextProps, nextState) {
+              return this.state.openEl !== nextState.openEl
+            }
+
+            componentDidUpdate() {
+              console.log('Accordion updated')
             }
           }
 
