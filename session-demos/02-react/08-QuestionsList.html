@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
         <div id="root"></div>
@@ -22,25 +23,96 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
         <script type="text/babel">
+            // action constants
+            const LOADING = 'LOADING', FETCHING_QUESTIONS = 'FETCHING_QUESTIONS', FETCHED_QUESTIONS = 'FETCHED_QUESTIONS', FETCH_QUESTIONS_ERRORED = 'FETCH_QUESTIONS_ERRORED';
+            
             class QuestionList extends React.Component {
+                constructor( props ) {
+                    super( props );
+
+                    this.state = {
+                        status: LOADING,
+                        items: [],
+                        error: null
+                    };
+                }
+
                 render() {
                     console.log( this.props );
-                    
-                    return (
-                        <React.Fragment>
-                            {
 
-                            }
-                        </React.Fragment>
-                    );
+                    let el;
+
+                    switch( this.state.status ) {
+                        case LOADING: 
+                            el = (
+                                <div className="alert alert-info">
+                                    We are working on it...
+                                </div>
+                            );
+                            break;
+                        case FETCHING_QUESTIONS:
+                            el = (
+                                <div className="alert alert-success">
+                                    Fetching questions. Hang on...
+                                </div>
+                            );
+                            break;
+                        case FETCHED_QUESTIONS:
+                            el = (
+                                <React.Fragment>
+                                    <ul>
+                                        {
+                                            this.state.items.map(
+                                                item => <li key={item.question_id}>
+                                                    <a href={item.link}>{item.title}</a>
+                                                </li>
+                                            )
+                                        }
+                                    </ul>
+                                </React.Fragment>
+                            );
+                            break;
+                        case FETCH_QUESTIONS_ERRORED:
+                            el = (
+                                <div className="alert alert-danger">
+                                    Oops! Something went wrong while trying to fetch questions. ({this.state.error})
+                                </div>
+                            )
+                    }
+                    
+                    return <div className="container">{el}</div>;
+                }
+
+                componentDidMount() { // called after component was added to the DOM
+                    this.setState(
+                        {
+                            status: FETCHING_QUESTIONS
+                        },
+                        () => {
+                            axios.get( 'https://api.stackexchange.com/2.0/questions?site=stackoverflow' )
+                                .then( response => response.data.items ) 
+                                .then( items => {
+                                    this.setState(
+                                        {
+                                            status: FETCHED_QUESTIONS,
+                                            items: items
+                                        }
+                                    )
+                                })
+                                .catch( error => {
+                                    this.setState(
+                                        {
+                                            status: FETCH_QUESTIONS_ERRORED,
+                                            error: error
+                                        }
+                                    );
+                                });
+                        }
+                    )
                 }
             }
 
-            axios.get( 'https://api.stackexchange.com/2.0/questions?site=stackoverflow' )
-                .then( response => response.data.items ) 
-                .then( items => {
-                    ReactDOM.render( <QuestionList items={items} />, document.getElementById( 'root' ) );
-                });
+            ReactDOM.render( <QuestionList />, document.getElementById( 'root' ) );
         </script>
     </body>
 </html>

@@ -16,6 +16,9 @@
         <!-- ReactDOM does DOM rendering -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
 
+        <!-- Prop types check -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.7.2/prop-types.js"></script>
+
         <!-- Babel to process script with JSX code (and also be confident of using ES6 features withut having to worry about browser support for them) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
@@ -120,9 +123,25 @@
                 }
             }
 
+            Invoice.defaultProps = {
+                invoiceDate: new Date(),
+                discountPercentage: 10
+            };
+
+            Invoice.propTypes = {
+                invoiceDate: PropTypes.object,
+                items: PropTypes.arrayOf(PropTypes.shape({
+                    name: PropTypes.string,
+                    quantity: PropTypes.number,
+                    price: PropTypes.number
+                })).isRequired,
+                accountNumber: PropTypes.number.isRequired,
+                discountPercentage: PropTypes.number
+            };
+
             const invoiceProps = {
                 invoiceDate: new Date( 2019, 2, 15 ),
-                accountNumber: 123,
+                accountNumber: "hello",
                 items: [
                     { name: 'Reynold\'s ball point pen', quantity: 100, price: 1 },
                     { name: 'Staedtler Eraser', quantity: 50, price: 2.50 },
@@ -130,11 +149,14 @@
                 ],
                 discountPercentage: 20
             };
+
+            const { discountPercentage, ...invoicePropsMinusDiscountProp } = invoiceProps;
             
             ReactDOM.render( 
                 [
                     <Invoice {...invoiceProps} key="invoice-1" />,
-                    <Invoice {...invoiceProps} discountPercentage={0} key="invoice-2" />
+                    <Invoice {...invoiceProps} discountPercentage={0} key="invoice-2" />,
+                    <Invoice {...invoicePropsMinusDiscountProp} key="invoice-3" />
                 ],
                 document.getElementById( 'root' )
             );
