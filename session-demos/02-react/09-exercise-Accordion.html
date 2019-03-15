@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <style>
+            .panel { border: 1px solid crimson; border-radius: 5px; margin: 0 10px 10px;}
+            .panel-heading, .panel-body { padding: 10px; margin: 0;}
+            .panel-heading { background-color: lightpink; }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+    
+        <!-- React core -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+
+        <!-- ReactDOM does DOM rendering -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+
+        <!-- Babel to process script with JSX code (and also be confident of using ES6 features withut having to worry about browser support for them) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+          function Panel( props ) {
+            return(
+              <div className='panel'>
+                <PanelHead {...props} />
+                <PanelBody {...props}>{props.body}</PanelBody>
+              </div>
+            )
+          }
+          function PanelHead( props ) {
+            return(
+              <h3 className='panel-heading' onClick={props.clickHandler.bind(null, props.id)}>{props.title}</h3>
+            )
+          }
+          function PanelBody( props ) {
+            return(
+              <div className='panel-body' style={{ display: props.id === String(props.openEl) ? 'block' : 'none' }}>{props.children}</div>
+            )
+          }
+          class Accordion extends React.Component {
+            constructor( props ) {
+              super(props)
+              this.state = {
+                openEl: 0,
+              }
+            }
+            clickHandler = (id, event) => {
+              this.setState({
+                openEl: id
+              })
+            }
+            render() {
+              return(
+                <div className='accordion'>
+                  {this.props.panels.map((panel) => {
+                    return(
+                      <Panel key={panel.id} {...panel} openEl={this.state.openEl} clickHandler={this.clickHandler} />
+                    )
+                  })}
+                </div>
+              )
+            }
+          }
+          const panels = [
+            {
+              title: "Chapter 1",
+              body: `
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ultricies eu felis ac gravida. Proin varius ipsum leo, nec tristique magna vulputate in. Mauris facilisis finibus nisi. Curabitur lobortis a lorem luctus tincidunt. Ut eu cursus tortor. Sed vestibulum leo ut augue commodo pellentesque. Fusce ac mi eu lorem accumsan interdum et sit amet metus. Etiam nec quam maximus, elementum turpis ut, tristique purus. Nulla facilisi. Aliquam vitae interdum nisi, vitae fringilla mauris. Aliquam elementum sollicitudin massa nec rutrum. Suspendisse id lacus sem. In ornare malesuada ex, at lobortis metus. Nullam pellentesque lacus id consequat pulvinar. In efficitur feugiat nulla, nec pretium magna pharetra et. Vivamus facilisis molestie ante at iaculis.
+              `,
+              id: "0",
+            },
+            {
+              title: "Chapter 2",
+              body: `
+              Nullam tortor lectus, volutpat iaculis fringilla varius, pulvinar vel nisl. Nunc et fermentum turpis. Proin vitae interdum ipsum, ut dictum purus. Sed quis augue mauris. In suscipit nec odio eu malesuada. Nullam ultricies sapien nec ornare consequat. Sed non viverra nibh. Donec cursus justo eget ultricies mattis. Vestibulum iaculis ipsum sit amet nulla sagittis fringilla. Nunc sollicitudin fringilla lectus, nec aliquet elit pretium eget.
+              `,
+              id: "1",
+            },
+            {
+              title: "Chapter 3",
+              body: `
+              Etiam suscipit libero in porttitor tempus. Ut a nisi tincidunt eros gravida bibendum in sit amet turpis. Donec pellentesque, libero et vestibulum fermentum, dui ante convallis mi, ac euismod tellus dolor eu tellus. Quisque ut dolor id quam posuere rutrum eu eget urna. Curabitur elementum magna vitae ipsum viverra, nec elementum ipsum auctor. Integer sed bibendum enim, id porta eros. Nulla facilisi. Sed convallis venenatis pretium. Pellentesque dapibus ex non libero finibus, sit amet pellentesque enim maximus. Aliquam ullamcorper molestie elit eu tincidunt.
+              `,
+              id: "2",
+            },
+          ]
+          ReactDOM.render(
+            //<Accordion panels={panels} />,
+            <Accordion panels={panels} />,
+            document.getElementById('root')
+          )
+        </script>
+    </body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+    
+        <!-- React core -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+
+        <!-- ReactDOM does DOM rendering -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+
+        <!-- Babel to process script with JSX code (and also be confident of using ES6 features withut having to worry about browser support for them) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            class Parent extends React.Component {
+                // Phase 1: Mounting
+                constructor( props ) {
+                    console.log( 'Parent::ctr' );
+                    super( props );
+
+                    this.state = {
+                        x: 1
+                    }
+                }
+
+                increment = () => {
+                    this.setState(curState => ({
+                        x: curState.x + 1
+                    }));
+                }
+
+                componentWillMount() {
+                    console.log( 'Parent::cwm' );
+                }
+
+                render() {
+                    console.log( 'Parent::render' );
+                    return (
+                        <React.Fragment>
+                            <div>state {this.state.x} | props {this.props.p}</div>
+                            <br />
+                            <button onClick={this.increment}>+</button>
+                        </React.Fragment>
+                    );
+                }
+
+                componentDidMount() { // most important mounting phase method
+                    console.log( 'Parent::cdm' );
+                }
+
+                // Phase 2: Update phase
+                shouldComponentUpdate( nextProps, nextState ) {
+                    console.log( 'Parent:scu' );
+                    console.log( 'nextState = ', nextState );
+                    console.log( 'this.props = ', this.props );
+                    console.log( 'nextProps = ', nextProps );
+                    return this.state.x !== nextState.x || this.props.p !== nextProps.p;
+                }
+
+                // this one is deprecated too
+                // one more component lifecycle method exists that gets called after shouldComponentUpdate
+
+                // React actually changes the state here
+
+                // render gets called now
+
+                componentDidUpdate( prevProps, prevState ) {
+                    console.log( 'Parent::cdu' );
+                    console.log( 'prevState = ', prevState );
+                    console.log( 'this.state = ', this.state );
+                    console.log( 'this.props = ', this.props );
+                    console.log( 'prevProps = ', prevProps );
+                    // Ajax calls etc. after state changes
+                }
+
+                componentWillUnmount() {
+                    console.log( 'Parent::cwu' );
+                }
+            }
+
+            const el = <Parent p={1} />;
+            ReactDOM.render( el, document.getElementById( 'root' ) );
+
+            setTimeout(() => {
+                ReactDOM.render( <Parent p={2} />, document.getElementById( 'root' ) );
+            }, 5000);
+
+            setTimeout(() => {
+                ReactDOM.render( <div />, document.getElementById( 'root' ) );
+            }, 10000);
+        </script>
+    </body>
+</html>
