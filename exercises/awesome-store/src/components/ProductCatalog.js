@@ -62,14 +62,28 @@ class ProductCatalog extends React.Component {
                                             <td>
                                                 {item.description}
                                             </td>
-                                            <td>
+                                            <td style={{fontSize: '1.7em'}}>
                                                 <span className="sr-only">{item.starRating}/5</span>
+                                                <span style={{
+                                                    color: 'lightgray',
+                                                    display: 'inline-block',
+                                                    verticalAlign: 'top',
+                                                }}>
+                                                    <span className="glyphicon glyphicon-star-empty"></span>
+                                                    <span className="glyphicon glyphicon-star-empty"></span>
+                                                    <span className="glyphicon glyphicon-star-empty"></span>
+                                                    <span className="glyphicon glyphicon-star-empty"></span>
+                                                    <span className="glyphicon glyphicon-star-empty"></span>
+                                                </span>
                                                 <span title={item.starRating + '/5'} style={{
+                                                    color: 'gold',
                                                     display: 'inline-block',
                                                     width: item.starRating + 'em',
                                                     overflow: 'hidden',
                                                     whiteSpace: 'nowrap',
                                                     verticalAlign: 'top',
+                                                    position: 'relative',
+                                                    left: '-5em',
                                                 }}>
                                                     <span className="glyphicon glyphicon-star"></span>
                                                     <span className="glyphicon glyphicon-star"></span>
