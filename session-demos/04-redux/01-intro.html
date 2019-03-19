@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        Counter: <span id="counter"></span>
+        <button onclick="increment()">+</button>
+        <button onclick="decrement()">-</button>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
+
+        <script>
+            // action constants
+            const INCREMENT = 'INCREMENT', DECREMENT = 'DECREMENT';
+
+            // action creators
+            const incrementAC = () => ({
+                type: INCREMENT
+            });
+           
+            const decrementAC = () => ({
+                type: DECREMENT
+            });
+
+            // reducers - should be pure function
+            const counterReducer = ( curState = { counter : 0 }, action ) => {
+                let newState;
+
+                // construct the new State
+                switch( action.type ) {
+                    case INCREMENT:
+                        newState = {
+                            counter: curState.counter + 1
+                        };
+                        break;
+                    case DECREMENT:
+                        newState = {
+                            counter: curState.counter - 1
+                        };
+                        break;
+                    default:
+                        newState = curState;
+                }
+
+                return newState;
+            }
+
+            const store = Redux.createStore(
+                counterReducer,
+                // {
+                //     counter: 0
+                // },
+                /* enhancers */
+            );
+
+            const increment = () => {
+                store.dispatch( incrementAC() );
+            };
+            
+            const decrement = () => {
+                store.dispatch( decrementAC() );
+            };
+
+            const render = () => {
+                document.getElementById( 'counter' ).innerText = store.getState().counter;
+            };
+
+            render();
+            store.subscribe( render );
+        </script>
+    </body>
+</html>
