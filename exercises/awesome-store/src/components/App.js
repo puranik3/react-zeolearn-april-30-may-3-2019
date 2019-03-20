@@ -3,6 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import About from './About';
 import ProductCatalog from './ProductCatalog';
 import ProductDetail from './ProductDetail';
+import ProductAdd from './ProductAdd'
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
 
             <Switch>
                 <Route path="/" exact component={About}></Route>
+                <Route path="/catalog/add" exact component={ProductAdd}></Route>
                 <Route path="/catalog/:id" component={ProductDetail}></Route>
                 <Route path="/catalog" component={ProductCatalog}></Route>
             </Switch>

@@ -69,6 +69,9 @@ class ProductCatalog extends React.Component {
                                 }
                             </tbody>
                         </table>
+                        <Link to={{
+                          pathname: '/catalog/add/',
+                        }}><button className="btn btn-primary">Add Product</button></Link>
                     </React.Fragment>
                 );
                 break;
