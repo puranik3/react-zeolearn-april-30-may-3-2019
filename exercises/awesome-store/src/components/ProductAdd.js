@@ -7,8 +7,11 @@ class ProductAdd extends Component {
       
       this.state = {
         values: {
-          name: '',
+          productName: '',
           description: '',
+          price: '',
+          releaseDate: '',
+          starRating: 0,
         },
       }
     }
@@ -31,18 +34,36 @@ class ProductAdd extends Component {
     render() {
       return (
           <div className="container">
-          <div>{this.state.values.name}</div>
+          {console.log(this.state)}
             <form onSubmit={this.login}>
               <div className="form-group row">
                 <label className="control-label col-3" htmlFor="productName">Product Name</label>
                 <div className="col-9">
-                  <input type="text" className="form-control" name="product-name" id="productName" value={this.state.values.name} onChange={this.updateValues} />
+                  <input type="text" className="form-control" name="productName" id="productName" value={this.state.values.name} onChange={this.updateValues.bind(this)} />
                 </div>
               </div>
               <div className="form-group row">
-                <label className="control-label col-3" htmlFor="password">Product Description</label>
+                <label className="control-label col-3" htmlFor="description">Product Description</label>
                 <div className="col-9">
-                  <input type="text" className="form-control" name="password" id="password" value={this.state.values.description} onChange={this.updateValues} />
+                  <input type="text" className="form-control" name="description" id="description" value={this.state.values.description} onChange={this.updateValues} />
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="control-label col-3" htmlFor="price">Price</label>
+                <div className="col-9">
+                  <input type="text" className="form-control" name="price" id="price" value={this.state.values.price} onChange={this.updateValues} />
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="control-label col-3" htmlFor="releaseDate">Release Date</label>
+                <div className="col-9">
+                  <input type="text" className="form-control" name="releaseDate" id="releaseDate" value={this.state.values.releaseDate} onChange={this.updateValues} />
+                </div>
+              </div>
+              <div className="form-group row">
+                <label className="control-label col-3" htmlFor="starRating">Star Rating</label>
+                <div className="col-9">
+                  <input type="text" className="form-control" name="starRating" id="starRating" value={this.state.values.starRating} onChange={this.updateValues} />
                 </div>
               </div>
               <div className="form-group row">
