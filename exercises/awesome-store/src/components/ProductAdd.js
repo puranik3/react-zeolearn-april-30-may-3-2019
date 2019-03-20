@@ -77,24 +77,27 @@ class ProductAdd extends Component {
       );
     }
 
-    add = () => {
-      const newProduct = {
-        "name": this.state.values.name,
-        "code": "ONE-6",
-        "releaseDate": this.state.values.releaseDate,
-        "description": this.state.values.description,
-        "price": this.state.values.price,
-        "starRating": this.state.values.starRating,
-        "imageUrl": ""
-      }
-      console.log(newProduct)
-      axios.post( 'https://awesome-store-server.herokuapp.com/products', newProduct )
-      .then(function( response ) {
-          console.log( response.data );
-      })
-      .catch(function( error ) {
-          console.log( error.message );
-      });
+    add = ( event ) => {
+        event.preventDefault();
+      
+        const newProduct = {
+            "name": this.state.values.name,
+            "code": "ONE-6",
+            "releaseDate": this.state.values.releaseDate,
+            "description": this.state.values.description,
+            "price": this.state.values.price,
+            "starRating": this.state.values.starRating,
+            "imageUrl": ""
+        }
+        console.log(newProduct)
+        
+        axios.post( 'https://awesome-store-server.herokuapp.com/products', newProduct )
+        .then(function( response ) {
+            console.log( response.data );
+        })
+        .catch(function( error ) {
+            console.log( error.message );
+        });
     }
 }
 
