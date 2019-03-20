@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+const axios = require('axios')
 
 class ProductAdd extends Component {
 
@@ -35,7 +36,7 @@ class ProductAdd extends Component {
       return (
           <div className="container">
           {console.log(this.state)}
-            <form onSubmit={this.login}>
+            <form onSubmit={this.add}>
               <div className="form-group row">
                 <label className="control-label col-3" htmlFor="productName">Product Name</label>
                 <div className="col-9">
@@ -74,6 +75,26 @@ class ProductAdd extends Component {
             </form>
           </div>
       );
+    }
+
+    add = () => {
+      const newProduct = {
+        "name": this.state.values.name,
+        "code": "ONE-6",
+        "releaseDate": this.state.values.releaseDate,
+        "description": this.state.values.description,
+        "price": this.state.values.price,
+        "starRating": this.state.values.starRating,
+        "imageUrl": ""
+      }
+      console.log(newProduct)
+      axios.post( 'https://awesome-store-server.herokuapp.com/products', newProduct )
+      .then(function( response ) {
+          console.log( response.data );
+      })
+      .catch(function( error ) {
+          console.log( error.message );
+      });
     }
 }
 
