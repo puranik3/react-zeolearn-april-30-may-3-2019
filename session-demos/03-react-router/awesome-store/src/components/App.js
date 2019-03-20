@@ -1,22 +1,24 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, NavLink, Route, Switch } from 'react-router-dom';
 import About from './About';
 import ProductCatalog from './ProductCatalog';
 import ProductDetail from './ProductDetail';
 
 const App = () => {
+    const activeStyle = { fontWeight: "bold", backgroundColor: "lightgray", color: 'initial' };
+
     return (
         <div>
             <nav class="navbar navbar-default" role="navigation">
                 <div className="container">
                     <div class="navbar-header">
-                        <Link class="navbar-brand" to="/">Awesome Store</Link>
+                        <Link class="navbar-brand" to="/" activeStyle={activeStyle}exact>Awesome Store</Link>
                     </div>
                 
                     <div class="collapse navbar-collapse navbar-ex1-collapse">
                         <ul class="nav navbar-nav">
-                            <li><Link to="/catalog">Product Catalog</Link></li>
-                            <li><Link to="/login">Login</Link></li>
+                            <li><NavLink to="/catalog" activeStyle={activeStyle} exact>Product Catalog</NavLink></li>
+                            <li><NavLink to="/login" activeStyle={activeStyle} exact>Login</NavLink></li>
                         </ul>
                     </div>
                 </div>
