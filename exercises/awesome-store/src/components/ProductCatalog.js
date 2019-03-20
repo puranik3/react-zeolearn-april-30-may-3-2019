@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import StarRating from './StarRating';
 
 // action constants
 const LOADING = 'LOADING', FETCHING_PRODUCTS = 'FETCHING_PRODUCTS', FETCHED_PRODUCTS = 'FETCHED_PRODUCTS', FETCH_PRODUCTS_ERRORED = 'FETCH_PRODUCTS_ERRORED';
@@ -17,7 +18,6 @@ class ProductCatalog extends React.Component {
     }
 
     render() {
-        console.log( this.props );
 
         let el;
 
@@ -49,7 +49,6 @@ class ProductCatalog extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {console.log(this.state.items)}
                                 {
                                     this.state.items.map(
                                         item => <tr key={item.id}>
@@ -63,36 +62,7 @@ class ProductCatalog extends React.Component {
                                                 {item.description}
                                             </td>
                                             <td style={{fontSize: '1.7em'}}>
-                                                <div style={{whiteSpace: 'nowrap', width: '6em'}}>
-                                                    <span className="sr-only">{item.starRating}/5</span>
-                                                    <span style={{
-                                                        color: 'lightgray',
-                                                        display: 'inline-block',
-                                                        verticalAlign: 'top',
-                                                    }}>
-                                                        <span className="glyphicon glyphicon-star-empty"></span>
-                                                        <span className="glyphicon glyphicon-star-empty"></span>
-                                                        <span className="glyphicon glyphicon-star-empty"></span>
-                                                        <span className="glyphicon glyphicon-star-empty"></span>
-                                                        <span className="glyphicon glyphicon-star-empty"></span>
-                                                    </span>
-                                                    <span title={item.starRating + '/5'} style={{
-                                                        color: 'gold',
-                                                        display: 'inline-block',
-                                                        width: item.starRating + 'em',
-                                                        overflow: 'hidden',
-                                                        whiteSpace: 'nowrap',
-                                                        verticalAlign: 'top',
-                                                        position: 'relative',
-                                                        left: '-5em',
-                                                    }}>
-                                                        <span className="glyphicon glyphicon-star"></span>
-                                                        <span className="glyphicon glyphicon-star"></span>
-                                                        <span className="glyphicon glyphicon-star"></span>
-                                                        <span className="glyphicon glyphicon-star"></span>
-                                                        <span className="glyphicon glyphicon-star"></span>
-                                                    </span>
-                                                </div>
+                                                <StarRating rating={item.starRating} total={5}/>
                                             </td>
                                         </tr>
                                     )
@@ -108,6 +78,9 @@ class ProductCatalog extends React.Component {
                         Oops! Something went wrong while trying to fetch PRODUCTS. ({this.state.error})
                     </div>
                 )
+                break
+            default:
+                el = ''
         }
         
         return <div className="container">{el}</div>;
