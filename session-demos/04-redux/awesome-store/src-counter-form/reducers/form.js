@@ -1,6 +1,6 @@
 import { USERNAME_UPDATE } from '../actions/constants';
 
-const formReducer = ( curState = { username: '', password: '' }, action ) => {
+const formReducer = ( curState = { username: '' }, action ) => {
     let newState;
 
     // construct the new State

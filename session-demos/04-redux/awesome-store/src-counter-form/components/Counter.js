@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Counter( props ) {
-    const { increment, decrement, counter } = props;
+    const { counter, increment, decrement } = props;
     
     return (
         <div>

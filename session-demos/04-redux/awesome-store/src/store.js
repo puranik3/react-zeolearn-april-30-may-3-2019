@@ -1,12 +1,9 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import counterReducer from './reducers/counter';
-import formReducer from './reducers/form';
+import thunk from 'redux-thunk';
 
-const store = createStore(
+export const store = createStore(
     combineReducers({
-        counter: counterReducer,
-        form: formReducer
-    })
+        products: productsReducer
+    }),
+    applyMiddleware( thunk )
 );
-
-export default store;
