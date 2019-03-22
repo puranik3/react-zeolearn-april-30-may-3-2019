@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { LOADING, FETCHING_PRODUCTS, FETCHED_PRODUCTS, FETCH_PRODUCTS_ERRORED } from './constants';
 
 export const loadingAC = () => ({
