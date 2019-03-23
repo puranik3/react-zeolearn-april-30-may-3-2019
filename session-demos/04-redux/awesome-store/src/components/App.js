@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 import About from './About';
 import ProductCatalog from '../containers/ProductCatalog';
-import ProductDetail from './ProductDetail';
+import ProductDetail from '../containers/ProductDetail';
 import ProductAdd from './ProductAdd'
 
 const App = () => {
