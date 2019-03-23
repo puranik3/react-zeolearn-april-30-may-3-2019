@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { LOADING, FETCHING_PRODUCTS, FETCHED_PRODUCTS, FETCH_PRODUCTS_ERRORED } from './constants';
 import { FETCHING_PRODUCT, FETCHED_PRODUCT, FETCH_PRODUCT_ERRORED } from './constants';
+import { FETCHING_REVIEWS, FETCHED_REVIEWS, FETCH_REVIEWS_ERRORED } from './constants';
 
 export const loadingAC = () => ({
     type: LOADING
@@ -71,6 +72,42 @@ export const fetchingProductThunk = () => {
             })
             .catch( error => {
                 dispatch( fetchProductsErroredAC( error ) );
+            });
+    };
+};
+
+export const fetchingReviewsAC = reviews => ({
+  type: FETCHING_REVIEWS,
+  payload: {
+    reviews: reviews
+  }
+})
+
+export const fetchedReviewsAC = reviews => ({
+    type: FETCHED_REVIEWS,
+    payload: {
+        reviews: reviews
+    }
+});
+
+export const fetchReviewsErroredAC = error => ({
+    type: FETCH_REVIEWS_ERRORED,
+    payload: {
+        error: error
+    }
+});
+
+export const fetchingReviewsThunk = () => {
+    return dispatch => {
+        dispatch( fetchingReviewsAC() );
+
+        axios.get( 'https://awesome-store-server.herokuapp.com/products' )
+            .then( response => response.data )
+            .then( reviews => {
+                dispatch( fetchedReviewsAC( reviews ) );
+            })
+            .catch( error => {
+                dispatch( fetchReviewsErroredAC( error ) );
             });
     };
 };

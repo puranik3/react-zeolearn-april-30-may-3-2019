@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StarRating from './StarRating';
-import { Link } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom';
+import ProductReviews from '../containers/ProductReviews';
 
 class ProductDetail extends Component {
   render() {
@@ -29,6 +30,9 @@ class ProductDetail extends Component {
           <li role='presentation'><Link to={this.props.match.url}>Reviews</Link></li>
           <li role='presentation'><Link to={this.props.match.url + '/reviews/submit'}>Submit a Review</Link></li>
         </ul>
+        <Switch>
+          <Route path='/' component={ProductReviews}></Route>
+        </Switch>
       </div>
     );
   }
