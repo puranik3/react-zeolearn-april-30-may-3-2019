@@ -6,7 +6,6 @@ class ProductDetail extends Component {
     render() {
         const productId = this.props.match.params.id;
         const product = this.props.location.state;
-        console.log(product)
 
         return (
             <div className="container">
