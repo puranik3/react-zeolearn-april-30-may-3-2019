@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import ReviewList from '../containers/ReviewList'
+import ReviewProduct from '../containers/ReviewProduct'
 
 class ReviewPanel extends Component {
   render() {
@@ -16,6 +17,7 @@ class ReviewPanel extends Component {
         
         <Switch>
           <Route path={this.props.match.path} exact component={ReviewList}></Route>
+          <Route path={this.props.match.path + '/reviews/submit/'} exact component={ReviewProduct}></Route>
         </Switch>
       </div>
     )
