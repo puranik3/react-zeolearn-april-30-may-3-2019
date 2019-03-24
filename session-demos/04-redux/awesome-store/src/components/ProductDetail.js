@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StarRating from './StarRating';
-import { Link } from 'react-router-dom';
+import ReviewPanel from '../components/ReviewPanel'
 
 import { LOADING, FETCHING_PRODUCTS, FETCHED_PRODUCTS, FETCH_PRODUCTS_ERRORED } from '../actions/constants';
 
@@ -43,9 +43,8 @@ class ProductDetail extends Component {
                       <p>Release Date: {product.releaseDate}</p>
                     </div>
                   </div>
+                  <ReviewPanel />
 
-                  <Link to={this.props.match.url}>Reviews</Link> 
-                  <Link to={this.props.match.url + '/reviews/submit'}>Submit a Review</Link> 
               </div>
             );
             break;
