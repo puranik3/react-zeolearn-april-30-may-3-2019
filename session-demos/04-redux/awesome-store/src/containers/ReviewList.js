@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import ReviewPanel from '../components/ReviewPanel.js'
+import ReviewList from '../components/ReviewList.js'
 import { fetchingReviewsThunk } from '../actions/creators'
 import { withRouter } from 'react-router'
 
@@ -9,4 +9,4 @@ const mapDispatchToProps = dispatch => ({
     fetchReviews: () => dispatch( fetchingReviewsThunk() )
 })
 
-export default connect( mapStateToProps, mapDispatchToProps )( withRouter(ReviewPanel) )
+export default connect( mapStateToProps, mapDispatchToProps )( withRouter(ReviewList) )
