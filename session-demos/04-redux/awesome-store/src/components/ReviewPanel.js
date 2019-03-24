@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink, Switch, Route } from 'react-router-dom';
-import ReviewList from '../components/ReviewList'
+import ReviewList from '../containers/ReviewList'
 
 class ReviewPanel extends Component {
   render() {

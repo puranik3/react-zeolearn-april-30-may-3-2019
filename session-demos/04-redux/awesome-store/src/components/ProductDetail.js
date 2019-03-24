@@ -64,6 +64,7 @@ class ProductDetail extends Component {
     
     componentDidMount() {
       this.props.fetchProducts();
+      this.props.fetchReviews();
     }
 }
 

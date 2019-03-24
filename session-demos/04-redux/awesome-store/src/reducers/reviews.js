@@ -2,7 +2,7 @@ import { LOADING, FETCHING_REVIEWS, FETCHED_REVIEWS, FETCH_REVIEWS_ERRORED } fro
 
 export const reviewsReducer = ( curState = {
     status: LOADING,
-    items: [],
+    reviews: [],
     error: null
 }, action ) => {
     let newState;
@@ -14,7 +14,7 @@ export const reviewsReducer = ( curState = {
             newState = {
                 ...curState,
                 status: FETCHING_REVIEWS,
-                items: [],
+                reviews: [],
                 error: null
             };
             break;
@@ -22,7 +22,7 @@ export const reviewsReducer = ( curState = {
             newState = {
                 ...curState,
                 status: FETCHED_REVIEWS,
-                items: action.payload.reviews
+                reviews: action.payload.reviews
             };
             break;
         case FETCH_REVIEWS_ERRORED:
