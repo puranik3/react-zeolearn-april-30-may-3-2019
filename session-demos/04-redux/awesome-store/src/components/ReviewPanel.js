@@ -4,7 +4,6 @@ import ReviewList from '../components/ReviewList'
 
 class ReviewPanel extends Component {
   render() {
-    console.log('this: ', this)
     return (
       <div className='review-panel'>
         <ul className='nav nav-pills'>
