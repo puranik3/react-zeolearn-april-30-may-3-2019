@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import StarRating from './StarRating';
-import ReviewPanel from '../components/ReviewPanel'
+import ReviewPanel from '../containers/ReviewPanel'
 
 import { LOADING, FETCHING_PRODUCTS, FETCHED_PRODUCTS, FETCH_PRODUCTS_ERRORED } from '../actions/constants';
 

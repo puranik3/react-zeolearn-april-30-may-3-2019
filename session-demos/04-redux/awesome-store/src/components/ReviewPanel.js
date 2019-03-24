@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+import { NavLink, Switch, Route } from 'react-router-dom';
 import ReviewList from '../components/ReviewList'
 
 class ReviewPanel extends Component {
@@ -8,13 +8,14 @@ class ReviewPanel extends Component {
     return (
       <div className='review-panel'>
         <ul className='nav nav-pills'>
-          {/*<li><NavLink activeStyle={{fontSize: '2em'}} exact to={this.props.match.url}>Reviews</NavLink></li>*/}
-          {/*<li><NavLink to={this.props.match.url + '/reviews/submit'}>Submit a Review</NavLink></li>*/}
-          <li><Link to='/'>Yolo</Link></li>
+          <li><NavLink activeStyle={{backgroundColor: '#eee'}} exact to={this.props.match.url}>Reviews</NavLink></li>
+          <li><NavLink activeStyle={{backgroundColor: '#eee'}} to={this.props.match.url + '/reviews/submit'}>
+            Submit a Review</NavLink>
+          </li>
         </ul>
         
         <Switch>
-          <Route path='/' component={ReviewList}></Route>
+          <Route path={this.props.match.url} exact component={ReviewList}></Route>
         </Switch>
       </div>
     )
