@@ -2,7 +2,7 @@ import React from 'react';
 
 function StarRating( props ) {
   return (
-    <div style={{whiteSpace: 'nowrap', width: '6em'}}>
+    <div style={{whiteSpace: 'nowrap', width: '6em', display: 'inline-block'}}>
       <span className="sr-only">{props.rating}/{props.total}</span>
       <span style={{
         color: 'lightgray',
