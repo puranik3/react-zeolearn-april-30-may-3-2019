@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { LOADING, FETCHING_PRODUCTS, FETCHED_PRODUCTS, FETCH_PRODUCTS_ERRORED } from './constants';
-import { FETCHING_REVIEWS, FETCHED_REVIEWS, FETCH_REVIEWS_ERRORED } from './constants';
+import { LOADING_REVIEWS, FETCHING_REVIEWS, FETCHED_REVIEWS, FETCH_REVIEWS_ERRORED } from './constants';
 
 export const loadingAC = () => ({
     type: LOADING
@@ -39,6 +39,10 @@ export const fetchingProductsThunk = () => {
     };
 };
 
+export const loadingReviewsAC = () => ({
+    type: LOADING_REVIEWS
+});
+
 export const fetchingReviewsAC = () => ({
     type: FETCHING_REVIEWS
 });
@@ -61,7 +65,7 @@ export const fetchingReviewsThunk = () => {
     return dispatch => {
         dispatch( fetchingReviewsAC() );
 
-        axios.get( 'https://awesome-store-server.herokuapp.com/products' )
+        axios.get( 'https://awesome-store-server.herokuapp.com/reviews' )
             .then( response => response.data ) 
             .then( items => {
                 dispatch( fetchedReviewsAC( items ) );

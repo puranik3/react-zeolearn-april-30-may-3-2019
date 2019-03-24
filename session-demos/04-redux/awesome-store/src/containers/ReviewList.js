@@ -4,8 +4,7 @@ import { fetchingReviewsThunk } from '../actions/creators'
 import { withRouter } from 'react-router'
 
 const mapStateToProps = state => ( {
-  ...state.products,
-  testing: 'Is this thing on?'
+  ...state.reviews,
 })
 
 const mapDispatchToProps = dispatch => ({
