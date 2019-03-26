@@ -1,18 +1,15 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { productsReducer } from './reducers/products.js'
-import { watchProductsFetch } from './sagas/productsFetch';
-
-const sagaMiddleware = createSagaMiddleware();
+import { reviewsReducer } from './reducers/reviews.js'
 
 export const store = createStore(
     combineReducers({
-        products: productsReducer
+        products: productsReducer,
+        reviews: reviewsReducer
     }),
-    composeWithDevTools( applyMiddleware( logger, sagaMiddleware ) )
+    composeWithDevTools( applyMiddleware( logger, thunk ) )
 );
-
-sagaMiddleware.run( watchProductsFetch );

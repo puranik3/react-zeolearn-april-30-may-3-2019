@@ -6,7 +6,6 @@ import { LOADING, FETCHING_PRODUCTS, FETCHED_PRODUCTS, FETCH_PRODUCTS_ERRORED } 
             
 class ProductCatalog extends React.Component {
     render() {
-        console.log( 'this.props = ', this.props );
         let el;
 
         switch( this.props.status ) {
