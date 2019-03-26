@@ -80,3 +80,7 @@ Please refer the [Training Outline](./react-training-outline.pdf)
 - [Promises - good article explaining its workings](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
 - [Axios - Promise based HTTP library](https://github.com/axios/axios)
 - [Dan Abramov's article on Presentational + COntainer components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+
+## Todos
+1. FOrms in React - good way to handle
+2. Example of mock function usage
