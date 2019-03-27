@@ -1,0 +1,16 @@
+webpackHotUpdate("index",{
+
+/***/ "./src/components/HelloWorld.js":
+/*!**************************************!*\
+  !*** ./src/components/HelloWorld.js ***!
+  \**************************************/
+/*! exports provided: default */
+/*! all exports used */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _HelloWorld_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HelloWorld.css */ \"./src/components/HelloWorld.css\");\n/* harmony import */ var _HelloWorld_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_HelloWorld_css__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _images_golden_gate_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../images/golden-gate.jpg */ \"./src/images/golden-gate.jpg\");\n/* harmony import */ var _images_golden_gate_jpg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_images_golden_gate_jpg__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _css_fonts_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../css/fonts.css */ \"./src/css/fonts.css\");\n/* harmony import */ var _css_fonts_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_css_fonts_css__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _data_products_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../data/products.json */ \"./src/data/products.json\");\nvar _data_products_json__WEBPACK_IMPORTED_MODULE_4___namespace = /*#__PURE__*/__webpack_require__.t(/*! ../data/products.json */ \"./src/data/products.json\", 1);\n/* harmony import */ var _data_todos_xml__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../data/todos.xml */ \"./src/data/todos.xml\");\n/* harmony import */ var _data_todos_xml__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_data_todos_xml__WEBPACK_IMPORTED_MODULE_5__);\n\n\n\n\n\n\n\nvar HelloWorld = function HelloWorld() {\n  console.log(_data_todos_xml__WEBPACK_IMPORTED_MODULE_5___default.a);\n  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"div\", {\n    className: \"welcome-message\",\n    style: {\n      fontFamily: 'Montserrat'\n    }\n  }, \"Hello Webpack!!\", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"br\", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"img\", {\n    src: _images_golden_gate_jpg__WEBPACK_IMPORTED_MODULE_2___default.a\n  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"ul\", null, _data_products_json__WEBPACK_IMPORTED_MODULE_4__.map(function (product) {\n    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(\"li\", {\n      key: product.id\n    }, product.name);\n  })));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (HelloWorld);\n\n//# sourceURL=webpack:///./src/components/HelloWorld.js?");
+
+/***/ })
+
+})

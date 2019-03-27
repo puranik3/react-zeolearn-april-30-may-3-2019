@@ -43,11 +43,14 @@
                     //         }
                     //     });
                     // }, 5000)
+
+                    this.emailRef = React.createRef();
+                    this.passwordRef = React.createRef();
                 }
 
                 updateValues = ( event ) => {
-                    const name = event.target.name;
-                    const value = event.target.value;
+                    const name = event.target.name; // this.emailRef.current.name
+                    const value = event.target.value; // this.emailRed.current.value
 
                     this.setState(
                         curState => ({
@@ -94,14 +97,14 @@
                                 <div className="form-group row">
                                     <label className="control-label col-3" htmlFor="email">Email</label>
                                     <div className="col-9">
-                                        <input type="email" className="form-control" name="email" id="email" value={this.state.values.email} onChange={this.updateValues} /> {/*defaultValue="john@examle.com"*/}
+                                        <input type="email" className="form-control" name="email" id="email" value={this.state.values.email} onChange={this.updateValues} ref={this.emailRef} /> {/*defaultValue="john@examle.com"*/}
                                         <div>{this.state.error.email}</div>
                                     </div>
                                 </div>
                                 <div className="form-group row">
                                     <label className="control-label col-3" htmlFor="password">Password</label>
                                     <div className="col-9">
-                                        <input type="password" className="form-control" name="password" id="password" value={this.state.values.password} onChange={this.updateValues} />
+                                        <input type="password" className="form-control" name="password" id="password" value={this.state.values.password} onChange={this.updateValues} ref={this.passwordRef} />
                                         <div>{this.state.error.password}</div>
                                     </div>
                                 </div>
