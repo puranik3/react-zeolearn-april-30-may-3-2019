@@ -1,5 +1,13 @@
 class Person {
     constructor( name, age ) {
+        if( name === undefined ) {
+
+        }
+
+        if( typeof name === 'number' ) {
+            // do something else 
+        }
+
         console.log( this ); // newly created object
         this.name = name;
         this.age = age;
@@ -45,3 +53,12 @@ mary.celebrateBirthday();
 console.log( mary.age );
 
 // Create a Movie class with properties like name, cast, showTimings etc.
+class Movie {
+    constructor( name, cast, showTimings ) {
+        this.name = name;
+        this.cast = cast;
+        this.showTimings = showTimings;
+    }
+
+    
+}
