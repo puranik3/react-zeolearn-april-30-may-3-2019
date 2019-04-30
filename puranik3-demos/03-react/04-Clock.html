@@ -19,7 +19,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
         <script type="text/babel">
-            function render() {
+            // Stateless Function Conponent definition
+            function Clock() {
                 const el = (
                     <h1>
                         <span>The local time is</span>
@@ -28,11 +29,15 @@
                     </h1>
                 );
 
-                // DOM updates are very efficient due to React DOM (Virtual DOM) diffing
-                ReactDOM.render( el, document.getElementById( 'root' ) );
+                return el;
             }
 
-            render();
+            function render() {
+                /* children are ignored here */
+                ReactDOM.render( <Clock>Any child</Clock>, document.getElementById( 'root' ) );
+            }
+
+            render()
             setInterval( render, 1000 );
         </script>
     </body>

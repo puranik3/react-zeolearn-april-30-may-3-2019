@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- root element where all of React's output will go into-->
+        <div id="root"></div>
+
+        <!-- react core library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+
+        <!-- react dom library (renders components to the browser) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            // Stateful Class Conponent definition
+            class Clock extends React.Component {
+                state = {
+                    time: new Date()
+                };
+
+                render() {
+                    const el = (
+                        <h1>
+                            <span>The local time is</span>
+                            <br />
+                            {this.state.time.toTimeString()}
+                        </h1>
+                    );
+
+                    return el;
+                }
+
+                // called after render is called for the first time and DOM rendering is over
+                componentDidMount() {
+                    setInterval(() => {
+                        this.setState({ // we make a request to react to change the state
+                            time: new Date()
+                        });
+                    }, 1000);
+                }
+            }
+            
+            ReactDOM.render( <Clock>Any child</Clock>, document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>
