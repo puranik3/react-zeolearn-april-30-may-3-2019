@@ -58,7 +58,5 @@ class Movie {
         this.name = name;
         this.cast = cast;
         this.showTimings = showTimings;
-    }
-
-    
+    }    
 }
