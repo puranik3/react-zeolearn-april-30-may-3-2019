@@ -1,1 +1,0 @@
-const el = <h1>Hello Babel</h1>;
