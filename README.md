@@ -1,4 +1,4 @@
-# react-zeolearn-jan-14-2019
+# react-zeolearn-april-30-may-3-2019
 React JS training material for training from [Zeolearn](https://www.zeolearn.com/)
 
 ## Exercises
@@ -35,12 +35,6 @@ Redux is a state management library. It can be used with any framework or standa
 * Latest version of one of Chrome/Firefox (preferably Chrome). Internet Explorer is not acceptable.  
     - [Chrome](https://www.google.com/chrome/browser/desktop/index.html)
     - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-
-## How to join the meeting
-The training session are recorded using Zoom (https://zoom.us). If you are using Zoom for the first time you will be prompted to download Zoom when you open the meeting link in the browser. Do so and follow the steps in the wizard. Please check the mail ffrom Zeolearn for meeting link.  
-
-## Video recordings
-The videos recordings of the session are shared by Zeolearn. Please contact Zeolearn in case of issues.  
 
 ## How to run the server for products (Ajax example)
 You need to run the server placed within server/ folder for the examples on Ajax.
