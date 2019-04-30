@@ -11,3 +11,5 @@ export {
 export default {
     PI: 3.14
 };
+
+// you can define a class/function/object etc. and export 
