@@ -74,12 +74,9 @@ Please refer the [Training Outline](./react-training-outline.pdf)
 - [Promises - good article explaining its workings](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
 - [Axios - Promise based HTTP library](https://github.com/axios/axios)
 - [Dan Abramov's article on Presentational + COntainer components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+- [Avoiding errors due to export of everything within in TypeScript](https://blog.fullstacktraining.com/cannot-redeclare-block-scoped-variable-name/)
 
 ### Some options for form validations in React
 - [Article by Michael Ries](https://medium.com/code-monkey/client-side-form-validation-in-react-40e367de47ba)
 - [react-form-validator-core](https://www.npmjs.com/package/react-form-validator-core) which is inspired by [formsy-react](https://www.npmjs.com/package/formsy-react)
 - [ Form validations for React-redux based projects](https://davidkpiano.github.io/react-redux-form/docs.html)
-
-## Todos
-1. FOrms in React - good way to handle
-2. Example of mock function usage
