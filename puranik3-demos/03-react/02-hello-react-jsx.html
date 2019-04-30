@@ -16,18 +16,21 @@
         <!-- react dom library (renders components to the browser) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
 
-        <script>
-            // React element : a simplified version of a DOM node
-            const spanEl = React.createElement( 'span', null, 'Hello React' );
-            const el = React.createElement( 'h1', { id: 'introduction' }, spanEl, 'Hello Redux' ); 
-            console.log( el );
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            // JSX - an extension to the JavaScript language
+            const el = <h1 id="introduction">
+                <span>Hello react</span>
+                Hello Redux
+            </h1>;
 
             // Takes in a React element, generates a DOM node and renders it within the said parent DOM node (second argument)
             ReactDOM.render( el, document.getElementById( 'root' ) );
 
             // React elements are immutable
-            el.type = 'h2';
-            el.props.children = 'Hello React v2';
+            // el.type = 'h2';
+            // el.props.children = 'Hello React v2';
 
             console.log( el );
         </script>
