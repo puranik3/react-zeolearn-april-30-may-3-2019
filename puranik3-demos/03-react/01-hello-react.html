@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- root element where all of React's output will go into-->
+        <div id="root"></div>
+
+        <!-- react core library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+
+        <!-- react dom library (renders components to the browser) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+
+        <script>
+            // React element : a simplified version of a DOM node
+            const el = React.createElement( 'h1', { id: 'introduction' }, 'Hello React' ); 
+            console.log( el );
+
+            // Takes in a React element, generates a DOM node and renders it within the said parent DOM node (second argument)
+            ReactDOM.render( el, document.getElementById( 'root' ) );
+
+            // React elements are immutable
+            el.type = 'h2';
+            el.props.children = 'Hello React v2';
+
+            console.log( el );
+        </script>
+    </body>
+</html>
