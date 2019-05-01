@@ -20,21 +20,20 @@
 
         <script type="text/babel">
             function Dummy( props ) {
-                console.log( 'props = ', props );
+                const arr = [
+                    <div>I am a div (1)</div>,
+                    <div>I am a div (2)</div>
+                ];
 
                 return (
-                    <div>{JSON.stringify( props )}</div>
+                    <div>{props.children}</div>
                 );
             }
 
-            function foo() { console.log( 'foo' ); }
-
-            // We can also pass a class (which means we can also pass a class component)
-            class Counter extends React.Component {
-                render() { return <div>I am a counter</div>; }
-            }
-
-            ReactDOM.render( <Dummy str="hello" x={1} isRaining={true} items={[1, 2, 3]} obj={{x: 1, y : 2}} foo={foo} Counter={Counter} />, document.getElementById( 'root' ) );
+            ReactDOM.render( <Dummy>
+                <span>I am a child (1)</span>
+                <span>I am a child (2)</span>
+            </Dummy>, document.getElementById( 'root' ) );
         </script>
     </body>
 </html>
