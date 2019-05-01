@@ -21,13 +21,79 @@
         <script type="text/babel">
             class Counter extends React.Component {
                 state = {
-                    count: 0
+                    count: 0,
+                    x: 1
                 };
 
+                // this syntax is proposed for a future version of JavaScript (supported in Babel already)
+                // this syntax binds the function call context to the object automatically
+                increment = () => {
+                    console.log( this );
+                    // you can now set the state - it will work fine
+                    this.setState( // merges the passed state with the current state
+                        () => { // this function is called by react when it decides to actually change the state
+                            return {
+                                count: this.state.count + 1
+                            }
+                        },
+                        () => { // React changed the state. Now it calls this function.
+                            console.log( 'state has changed now to ' + this.state.count );
+                        }
+                    );
+                    // this.setState( // merges the passed state with the current state
+                    //     () => { // this function is called by react when it decides to actually change the state
+                    //         return {
+                    //             count: this.state.count + 1
+                    //         }
+                    //     }
+                    // );
+                    // this.setState( // merges the passed state with the current state
+                    //     () => { // this function is called by react when it decides to actually change the state
+                    //         return {
+                    //             count: this.state.count + 1
+                    //         }
+                    //     }
+                    // );
+                    // this.setState( // merges the passed state with the current state
+                    //     {
+                    //         count: this.state.count + 1
+                    //     }
+                    // );
+                    // this.setState( // merges the passed state with the current state
+                    //     {
+                    //         count: this.state.count + 1
+                    //     }
+                    // );
+                }
+
+                decrement = () => {
+                    this.setState(
+                        {
+                            count: this.state.count - 1
+                        }
+                    );
+                }
+
                 // Define a render method that renders a the count within a span and also 2 buttons - increment and decrement
+                render() {
+                    const { count } = this.state;
+
+                    return (
+                        <React.Fragment>
+                            {/* React.Fragment avoid need to use a wrapper element like div - no unnecessary element is rendered */}
+                            <span id="counter">{count}</span>
+                            {/*<button id="increment" onClick={this.increment.bind( this )}>+</button>*/}
+                            <button id="increment" onClick={this.increment}>+</button>
+                            <button id="decrement" onClick={this.decrement}>-</button>
+                        </React.Fragment>
+                    );
+                }
             }
 
-            ReactDOM.render( , document.getElementById( 'root' ) );
+            // static variable of a class (equivalent of static variable actually)
+            // Counter.xyz = 1;
+
+            ReactDOM.render( <Counter />, document.getElementById( 'root' ) );
         </script>
     </body>
 </html>
