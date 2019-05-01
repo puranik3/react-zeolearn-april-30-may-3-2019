@@ -1,9 +1,10 @@
 export default interface Product {
     id: number,
-    createdDate: string,
-    reviewer: string,
-    productId: number,
+    name: string,
+    code: string,
+    releaseDate: string,
+    description: string,
+    price: number,
     starRating: number,
-    title: string,
-    text: string
+    imageUrl: string
 }
