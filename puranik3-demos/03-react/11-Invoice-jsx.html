@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- root element where all of React's output will go into-->
+        <div id="root"></div>
+
+        <!-- react core library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+
+        <!-- react dom library (renders components to the browser) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            function Invoice( props ) {
+                // Have this render a row for every item
+                // 
+            }
+
+            const items = [
+                {
+                    name: 'One Plus 6T',
+                    price: 600,
+                    quantity: 20
+                },
+                {
+                    name: 'lightning cable',
+                    price: 25,
+                    quantity: 50
+                }
+            ];
+
+            ReactDOM.render( <Invoice items={items} , document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>
