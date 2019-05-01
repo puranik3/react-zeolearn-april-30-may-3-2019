@@ -20,26 +20,44 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
         <script type="text/babel">
-            class Invoice extends React.Component {
-                render( props ) {
-                    // Have this render a row for every item
-                    // Row calculates total for the item
-                    // The last row lists the total for all items
+            interface Item {
+                name: string;
+                price: number;
+                quantity: number;
+            }
 
-                    // Important note:
-                    // If you have an array of React elements like
-                    // const els = [ <span>Span 1</span>, <span>Span 2</span> ] then {els} renders the array of elements
-                    
-                    // Some useful array methods in JS
-                    // arr.push( item ) pushes item to the end of an array arr
-                    // Most people prefer to use arr.map() to generate an array of react elements from some other array (example, an array of items in our case)
+            interface Props {
+                items: Array<Item>
+            }
+            
+            interface State {
+                items: Array<Item>
+            }
 
-                    deleteItem = () => {
+            class Invoice extends React.Component<Props, State> {
+                constructor( props ) {
+                    super( props ); // this.props = props
 
-                    }
+                    this.state = {
+                        items: this.props.items
+                    };
+                }
 
-                    const trs = this.props.items.map( item => (
-                        <tr onClick={deleteItem.bind()}>
+                deleteItem = ( item : Item, event : React.MouseEvent<HTMLTableRowElement> ) => {
+                    alert( item.name );
+                    // suggested - use splice() (you can google!) or filter (shown below)
+                    // [1, 2, 3, 4].filter( item => item % 2 === 0 ); // [ 2, 4 ]
+
+                    this.setState(
+                        () => ({
+                            items: this.state.items.filter( i => i !== item )
+                        })
+                    );
+                }
+
+                render() {
+                    const trs = this.state.items.map(item => (
+                        <tr onClick={this.deleteItem.bind( this, item )}>
                             <td>{item.name}</td>
                             <td>{item.price}</td>
                             <td>{item.quantity}</td>
@@ -82,7 +100,7 @@
                 }
             ];
 
-            ReactDOM.render( <Invoice items={items} />, document.getElementById( 'root' ) );
+            ReactDOM.render( <Invoice items={items} xyz={100} />, document.getElementById( 'root' ) );
         </script>
     </body>
 </html>
