@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ProductList from './components/ProductList';
 import App from './components/App';
-import { Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 // webpack
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const el = <Router><App /></Router>;
+const el = <BrowserRouter><App /></BrowserRouter>;
 ReactDOM.render( el, document.getElementById( 'root' ) );
