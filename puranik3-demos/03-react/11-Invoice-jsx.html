@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
     </head>
     <body>
         <!-- root element where all of React's output will go into-->
@@ -19,9 +20,53 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
         <script type="text/babel">
-            function Invoice( props ) {
-                // Have this render a row for every item
-                // 
+            class Invoice extends React.Component {
+                render( props ) {
+                    // Have this render a row for every item
+                    // Row calculates total for the item
+                    // The last row lists the total for all items
+
+                    // Important note:
+                    // If you have an array of React elements like
+                    // const els = [ <span>Span 1</span>, <span>Span 2</span> ] then {els} renders the array of elements
+                    
+                    // Some useful array methods in JS
+                    // arr.push( item ) pushes item to the end of an array arr
+                    // Most people prefer to use arr.map() to generate an array of react elements from some other array (example, an array of items in our case)
+
+                    deleteItem = () => {
+
+                    }
+
+                    const trs = this.props.items.map( item => (
+                        <tr onClick={deleteItem.bind()}>
+                            <td>{item.name}</td>
+                            <td>{item.price}</td>
+                            <td>{item.quantity}</td>
+                        </tr>
+                    ));
+
+                    return (
+                        <React.Fragment>
+                                <div className="container">
+                                <h2>Invoice</h2>
+                                <hr />
+                                <table className="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {trs}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </React.Fragment>
+                    );
+                }
             }
 
             const items = [
@@ -37,7 +82,7 @@
                 }
             ];
 
-            ReactDOM.render( <Invoice items={items} , document.getElementById( 'root' ) );
+            ReactDOM.render( <Invoice items={items} />, document.getElementById( 'root' ) );
         </script>
     </body>
 </html>
