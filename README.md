@@ -67,6 +67,11 @@ http://localhost:4201/posts/1/comments
 ## Table of contents
 Please refer the [Training Outline](./react-training-outline.pdf)  
 
+## Links to CDN files for React library and Babel
+- https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js
+- https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js
+- https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js
+
 ## References
 - [Official documentation for React](https://reactjs.org/)
 - [React.js cheatsheet at devhints.io](https://devhints.io/react)
