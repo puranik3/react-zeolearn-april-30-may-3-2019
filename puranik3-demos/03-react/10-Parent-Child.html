@@ -37,6 +37,18 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
 
         <script type="text/babel">
+            function PanelHeading( props ) {
+                return <div className="panel-heading" onClick={props.toggleCollapsed}>{props.heading}</div>
+            }
+
+            function PanelBody( props ) {
+                return this.state.collapsed ? null : (
+                    <div className="panel-body">
+                        {props.children}
+                    </div>
+                );
+            }
+
             class Panel extends React.Component {
                 state = {
                     collapsed: false
@@ -51,58 +63,11 @@
                 }
 
                 render() {
-                    let style = "";
-
-                    // One way to hide and show
-                    // if( this.state.collapsed ) {
-                    //     style = {
-                    //         display: 'none',
-                    //         backgroundColor: 'olive'
-                    //     };
-                    // } else {
-                    //     style = {
-                    //         display: 'block',
-                    //         backgroundColor: 'crimson'
-                    //     };
-
-                    //     // style = {...styleX, color: 'crimson' }
-                    // }
-
-                    // Another way
-                    // let el;
-                    // if( this.state.collapsed ) {
-                    //     el = null;
-                    // } else {
-                    //     el = (
-                    //         <div className="panel-body">
-                    //             {this.props.children}
-                    //         </div>
-                    //     );
-                    // }
-
                     return (
                         <React.Fragment>
                             <div className="panel">
-                                <div className="panel-heading" onClick={this.toggleCollapsed}>{this.props.heading}</div>
-                                {/*
-                                <div className="panel-body" style={style}>
-                                    {null}
-                                </div>
-                                */}
-                                {/*
-                                    this.state.collapsed ? null : (
-                                        <div className="panel-body">
-                                            {this.props.children}
-                                        </div>
-                                    )
-                                */}
-                                {
-                                    !this.state.collapsed && (
-                                        <div className="panel-body">
-                                            {this.props.children}
-                                        </div>
-                                    )
-                                }
+                                <PanelHeading heading={this.props.heading} toggleCollapsed={this.toggleCollapsed} />
+                                <PanelBody collapsed={this.state.collapsed}>{this.props.children}</PanelBody>
                             </div>
                         </React.Fragment>
                     );
