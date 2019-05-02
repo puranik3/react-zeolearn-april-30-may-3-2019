@@ -7,14 +7,13 @@ import { Route, Link } from 'react-router-dom';
 
 interface State {
     status: string,
-    product: Product | null
+    product?: Product
 }
 
 class ProductDetail extends Component<RouteComponentProps<any>, State> {
     // @todo Set state with status, product and error properties
     state : State = {
-        status: 'INITIALIZING_DETAILS',
-        product: null
+        status: 'INITIALIZING_DETAILS'
     };
 
     render() {
@@ -47,7 +46,7 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
-                                <h1>{product && product.name}</h1>
+                                <h1>{product ? product.name : ''}</h1>
                                 <hr />
                             </div>
                         </div>
@@ -73,8 +72,8 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
                         
                         <nav className="nav nav-tabs nav-stacked">
                             {/* Tip: Pass in product id as state to linked component*/}
-                            <Link className="nav-link active" to={{ pathname: `${this.props.match.url}/reviews`, state: productId }}>@todo Link to Reviews</Link>
-                            <a className="nav-link" href="">@todo Link to Post a Review</a>
+                            <Link className="nav-link active" to={{ pathname: `${this.props.match.url}/reviews`, state: productId }}>Reviews</Link>
+                            <a className="nav-link" href="">Post a Review</a>
                         </nav>
                         
                         <Route path={`${this.props.match.url}/reviews`} component={ReviewsList} />

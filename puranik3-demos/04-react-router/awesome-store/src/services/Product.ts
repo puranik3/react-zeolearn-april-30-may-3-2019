@@ -20,5 +20,15 @@ export const Product = {
             console.log( 'Some error : ', error.message );
             throw error; // let the caller handle it
         }
-    }
+    },
+    async getReviews( id : number ) {
+        try {
+            const response = await axios.get( `https://awesome-store-server.herokuapp.com/products/${id}/reviews
+            ` );
+            return response.data;
+        } catch( error ) {
+            console.log( 'Some error : ', error.message );
+            throw error; // let the caller handle it
+        }
+    },
 };
