@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- root element where all of React's output will go into-->
+        <div id="root"></div>
+
+        <!-- react core library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+
+        <!-- react dom library (renders components to the browser) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            class Parent extends React.Component { /* React.PureComponent does a shallow-eqaulity check against previous state and props and returns false is same (no re-rendering) */
+                // Phase 1 starts: Mounting phase methods
+                constructor( props ) {
+                    super( props ); // this.props = props;
+
+                    console.log( 'Parent::constructor' );
+                    console.log( this );
+
+                    this.state = {
+                        x: this.props.x
+                    };
+                }
+
+                componentWillMount() {
+                    console.log( 'Parent::componentWillMount (deprecated)' );
+                }
+
+                render() {
+                    console.log( 'Parent::render' );
+                    return (
+                        <div>
+                            props.p = {this.props.p} | state.x = {this.state.x}
+                        </div>
+                    );
+                }
+
+                componentDidMount() {
+                    console.log( 'Parent::componentDidMount' );
+
+                    setTimeout( () => this.setState( { x: 2 } ), 5000 );
+                }
+                
+                // Phase 1 ends: Mounting phase methods
+
+                // Phase 2 starts: Update phase methods
+                
+                componentWillReceiveProps( nextProps ) {
+                    console.log( 'Parent::componentWillReceiveProps' );
+                    // we need to reinitialize state.x somewhere...
+                    // this.setState({
+                    //     x: nextProps.x
+                    // });
+                }
+
+                shouldComponentUpdate( nextProps, nextState ) {
+                    // check if props/state values which do not affect the UI (not used in render) are the only ones that have changed
+                    console.log( 'Parent::shouldComponentUpdate' );
+                    console.log( nextProps, nextState );
+                    return true; // passing false prevents all the following lifecycle methods from being called
+                }
+
+                componentWillUpdate( nextProps, nextState ) {
+                    console.log( 'Parent::componentWillUpdate' );
+                }
+
+                // state and props actually get updated here
+                // render() gets called
+
+                componentDidUpdate( prevProps, prevState ) { // Ajax calls are to be done here
+                    console.log( 'Parent::componentDidUpdate' )
+                    console.log( prevProps, prevState );
+                    console.log( this.props, this.state );
+                }
+                
+                // Phase 2 ends: Update phase methods
+
+                // Phase 3: Unmounting phase
+                componentWillUnmount() {
+                    console.log( 'Parent::componentWillUnmount' );
+                }
+            }
+
+            ReactDOM.render( <Parent p={100} x={1} />, document.getElementById( 'root' ) );
+            
+            setTimeout( () => ReactDOM.render( <Parent p={200} />, document.getElementById( 'root' ) ), 6000 );
+        </script>
+    </body>
+</html>

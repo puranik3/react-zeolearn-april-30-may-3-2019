@@ -78,7 +78,7 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
                         </nav>
                         
                         <Route path={`${this.props.match.url}/reviews`} exact component={ReviewsList} />
-                        <Route path={`${this.props.match.url}/reviews/add`} component={ReviewForm} />
+                        <Route path={`${this.props.match.url}/reviews/add`} exact component={ReviewForm} />
                     </div>
                 );
                 break;
