@@ -12,6 +12,13 @@ export const Product = {
         }
     },
     async getProduct( id : number ) {
-        
+        try {
+            const response = await axios.get( `https://awesome-store-server.herokuapp.com/products/
+            ` );
+            return response.data;
+        } catch( error ) {
+            console.log( 'Some error : ', error.message );
+            throw error; // let the caller handle it
+        }
     }
 };
