@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { Product as ProductService } from '../services/Product';
 import Product from '../models/Product';
 
-interface State {
-    status: string,
-    products: Array<Product>
-}
+// interface State {
+//     status: string,
+//     products: Array<Product> | null | []
+// }
 
-class ProductList extends React.Component<{}, State> {
-    state : State = {
+class ProductList extends React.Component {
+    state = {
         status: 'INITIALIZING',
         products: []
     };
@@ -42,15 +42,19 @@ class ProductList extends React.Component<{}, State> {
                         </thead>
                         <tbody>
                             {
-                                this.state.products.map( product => (
-                                    <tr>
-                                        <td>
-                                            <Link to={"/catalog/" + product.id}>{product.name}</Link>
-                                        </td>
-                                        <td>{product.price}</td>
-                                        <td>{product.starRating}</td>
-                                    </tr>
-                                ))
+                                this.state.products && this.state.products.map( product => {
+                                    if( product ) {
+                                        return <tr>
+                                            <td>
+                                                <Link to={{ pathname: "/catalog/" + product.id, state: product }}>{product && product.name}</Link>
+                                            </td>
+                                            <td>{product && product.price}</td>
+                                            <td>{product && product.starRating}</td>
+                                        </tr>;
+                                    } else {
+                                        return null;
+                                    }
+                                })
                             }
                         </tbody>
                     </table>
