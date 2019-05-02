@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="root"></div>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+        
+        @todo Include axios and thunk scripts
+
+        <script type="text/babel">
+            // action constants
+            const LOADING = 'LOADING', FETCHING_QUESTIONS = 'FETCHING_QUESTIONS', FETCHED_QUESTIONS = 'FETCHED_QUESTIONS', FETCH_QUESTIONS_ERRORED = 'FETCH_QUESTIONS_ERRORED';
+
+            // action creators
+            const loadingAC = () => ({
+                type: LOADING
+            });
+
+            const fetchingQuestionsAC = () => ({
+                type: FETCHING_QUESTIONS
+            });
+            
+            const fetchedQuestionsAC = ( questions ) => ({
+                type: FETCHED_QUESTIONS,
+                payload: {
+                    questions: questions
+                }
+            });
+            
+            const fetchQuestionsErroredAC = ( error ) => ({
+                type: FETCH_QUESTIONS_ERRORED,
+                payload: {
+                    error: error
+                }
+            });
+
+
+            // @todo Define thunk to fetch questions - The side effect is the Ajax call to fetch questions from 'https://api.stackexchange.com/2.0/questions?site=stackoverflow'
+
+
+            // @todo Define the reducer
+            
+
+            // @todo Create the store and apply the thunk middleware (ReduxThunk.default)
+    
+
+            
+            class QuestionList extends React.Component {
+                constructor(props) {
+                    super(props);
+                    
+                    // @todo Set loading state
+                }
+                
+                render() {
+                    let el;
+
+                    switch( store.getState().status ) {
+                        case LOADING: 
+                            el = (
+                                <div className="alert alert-info">
+                                    We are working on it...
+                                </div>
+                            );
+                            break;
+                        case FETCHING_QUESTIONS:
+                            el = (
+                                <div className="alert alert-success">
+                                    Fetching questions. Hang on...
+                                </div>
+                            );
+                            break;
+                        case FETCHED_QUESTIONS:
+                            el = (
+                                <React.Fragment>
+                                    <ul>
+                                        {
+                                            store.getState().items.map(
+                                                item => <li key={item.question_id}>
+                                                    <a href={item.link}>{item.title}</a>
+                                                </li>
+                                            )
+                                        }
+                                    </ul>
+                                </React.Fragment>
+                            );
+                            break;
+                        case FETCH_QUESTIONS_ERRORED:
+                            el = (
+                                <div className="alert alert-danger">
+                                    Oops! Something went wrong while trying to fetch questions. ({this.state.error})
+                                </div>
+                            )
+                    }
+                    
+                    return <div className="container">{el}</div>;
+                }
+
+                componentDidMount() {
+                    store.subscribe( this.forceUpdate.bind( this ) );
+                    
+                    // @todo Dispatch thunk that initiates questions fetch
+                }
+            }
+
+            ReactDOM.render( <QuestionList />, document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>

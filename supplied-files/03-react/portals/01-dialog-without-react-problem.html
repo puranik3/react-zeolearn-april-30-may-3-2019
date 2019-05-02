@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Dialog without portal</title>
+        <link rel="stylesheet" href="../../css/demo.css">
+        <style>
+            body {
+                margin-top: 200px;
+            }
+
+            #dashboard-panel {
+                position: fixed;
+                top: 20px;
+                left: 8px;
+                right: 8px;
+                height: 140px;
+                padding: 10px;
+                overflow-y: auto;
+                background-color: lightgray;
+                z-index:2;
+            } 
+
+            #boring-stuff {
+                position: relative;
+                z-index: 1;
+            }
+
+            .dialog {
+                display: none;
+                position: fixed;
+                top: 100px;
+                left: 50%;
+                width: 400px;
+                padding: 10px;
+                border-radius: 5px;
+                margin-left: -200px;
+                background-color: #61dafb;
+                z-index: 1000;
+            }
+
+            .dialog-heading {
+                padding-bottom: 5px;
+                border-bottom: 1px solid white;
+            }
+
+            .text-center { text-align: center; }
+            .text-justify { text-align: justify; }
+        </style>
+    </head>
+    <body>
+        <div id="root"></div>
+        
+        <h1>Dialog without portals (No React, Dialog nested within child)</h1>
+        <hr />
+        <section id="dashboard-panel">
+            <h2 class="text-center">Dashboard</h2>
+            <hr />
+            Reprehenderit deserunt eu enim elit deserunt irure est. Et adipisicing nulla esse excepteur et duis officia officia commodo. Cillum ex quis veniam cupidatat sint amet. Ex quis excepteur et elit exercitation dolore tempor ex ut dolor ut adipisicing aute. Irure enim excepteur aute qui deserunt officia in eu ea aute aliquip eiusmod ex. In consectetur enim quis laboris.
+        </section>
+        <section id="boring-stuff">
+            <p>
+                This is some unimportant stuff on the page which is relegated to behind the dashboard. Nisi ut ipsum nulla officia mollit et nostrud ad. Consectetur est exercitation aute qui minim ea consequat. Eu est et Lorem nisi non minim officia. Nulla exercitation irure dolore esse quis incididunt occaecat pariatur eiusmod ea adipisicing ut ipsum. Consequat ex commodo aliqua ea nostrud aliquip sint quis consectetur non eiusmod cillum non est. Velit laboris sit dolore incididunt incididunt dolor sint nisi excepteur id.
+            </p>
+            <p>
+                Quis dolore ex voluptate exercitation laboris et deserunt duis in. Cillum dolore mollit labore eu proident culpa nisi id ea proident. Exercitation minim eu magna sint irure est eu eiusmod cupidatat amet esse. Fugiat minim aliqua excepteur et incididunt dolore. Mollit cillum sit quis exercitation. Elit enim consequat et reprehenderit minim elit nisi dolore do eiusmod excepteur. Irure sint enim commodo deserunt officia occaecat nisi officia irure minim proident. Do nisi consequat labore reprehenderit qui. Ullamco officia occaecat incididunt voluptate proident fugiat id sint minim labore. Ullamco qui aliquip laboris ipsum. Ea esse sint esse Lorem officia sit excepteur amet velit sunt. Amet eu dolor nostrud dolor exercitation sunt duis ad commodo. Culpa irure cillum qui Lorem qui ad proident. Officia cillum aliqua duis enim consequat fugiat non tempor voluptate eiusmod cillum sint. Incididunt non nulla laborum nostrud esse non anim ex ipsum aute. Tempor sunt enim tempor dolore sit aliquip fugiat ullamco.
+            </p>
+            <p>
+                To review terms and conditions, click here.
+                <button onclick="showDialog();">Review Terms</button>
+            </p>
+            <div class="dialog">
+                <div class="dialog-heading text-center">Terms and Conditions</div>
+                <div class="dialog-body text-justify">
+                    <p>
+                        By using this website you agree to the following terms and conditions...
+                    </p>
+                    <p>
+                        Under no circumstance shall nisi culpa fugiat adipisicing dolore nostrud aute sunt. Non ut amet sit tempor nisi. Consequat ex et duis do aute deserunt proident adipisicing ullamco irure et do. Anim non dolore est cillum labore minim dolor exercitation irure eiusmod esse.
+                    </p>
+                    <p>
+                        If you do not agree hit the CANCEL button. If you have read the terms, understood them, and agree, click the OK button.
+                        <div class="text-center">
+                            <button>CANCEL</button>
+                            <button>OK</button>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function showDialog() {
+                document.querySelector( '.dialog' ).style.display = 'block';
+            }
+        </script>
+    </body>
+</html>

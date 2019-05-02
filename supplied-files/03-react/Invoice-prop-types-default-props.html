@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="root"></div>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+
+        <!-- Prop types -->
+        @todo Include Prop Types (development version) script
+        
+        <script type="text/babel">
+            class Invoice extends React.Component {
+                constructor( props ) {
+                    super( props );
+
+                    this.state = {
+                        items: this.props.items
+                    };
+                }
+
+                deleteItem = ( item, event ) => {
+                    console.log( 'event = ', event );
+                    console.log( 'item = ', item.name );
+
+                    this.setState({
+                        items: this.state.items.filter( i => i !== item )
+                    });
+                }
+
+                getLineItems() {
+                    const props = this.props;
+                    const state = this.state;
+
+                    return state.items.map((item) => 
+                        <tr key={item.name}>
+                            <td>{item.name}</td>
+                            <td>{item.quantity}</td>
+                            <td>{item.price}</td>
+                            <td>{item.quantity * item.price}</td>
+                            <td><button className="btn btn-outline-danger" onClick={this.deleteItem.bind( null, item )}>Delete</button></td>
+                        </tr>
+                    );
+                }
+
+                getDiscountLine() {
+                    const props = this.props;
+
+                    if( props.discountPercentage === 0 ) {
+                        return null;
+                    } else {
+                        return (
+                            <div className="alert alert-success">
+                                Your are eligible for a discount of {props.discountPercentage}% on your next purchase.
+                            </div>
+                        );
+                    }
+                }
+
+                render() {
+                    const props = this.props;
+                    const state = this.state;
+
+                    const mainHeadingStyle = { color: 'crimson', fontSize: '1.5em' };
+                    const subHeadingStyle = { ...mainHeadingStyle, fontSize: '1.2em' };
+
+                    return (
+                        <React.Fragment>
+                            <div className="container">
+                                <h1 style={mainHeadingStyle}>Invoice</h1>
+                                <hr />
+                                {this.getDiscountLine()}
+                                Date: {props.invoiceDate.toDateString()}
+                                <table className="table table-bordered table-striped">
+                                    <thead className="thead-dark">
+                                        <tr>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Total</th>
+                                        <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {this.getLineItems()}
+                                        <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{state.items.reduce((total, line) => total + line.quantity * line.price, 0)}</td>
+                                        <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </React.Fragment>
+                    );
+                }
+            }
+
+            // @todo Set default values for the props - invoiceDate and discountPercentage
+
+            // @todo Set propTypes for invoiceDate, items (array of objects with name, quantity and price, required), accountNumber (number, required), discountPercentage (number or string, required)
+            
+            const invoiceProps = {
+                invoiceDate: new Date( 2019, 2, 15 ),
+                accountNumber: 12345678,
+                items: [
+                    { name: 'Reynold\'s ball point pen', quantity: 100, price: 1 },
+                    { name: 'Staedtler Eraser', quantity: 50, price: 2.50 },
+                    { name: 'Faber Castell Highlighter', quantity: 100, price: 1.50 }
+                ],
+                discountPercentage: 20
+            };
+            
+            ReactDOM.render(
+                <Invoice /* @todo Pass props using invoiceProps object */ key="invoice-1" />,
+                document.getElementById( 'root' )
+            );
+        </script>
+    </body>
+</html>

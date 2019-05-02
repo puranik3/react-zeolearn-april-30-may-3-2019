@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            // @todo Define ErrorBoundary class renders children passed to it, but catches errors in children and renders an error message instead wen an error occurs in a child
+
+            class MyComponent extends React.Component {
+                render() {
+                    if( Math.random() < 0.25 ) { // randomly throw an error
+                        foo(); // undefined function foo
+                    }
+
+                    return (
+                        <h1>Hello React</h1>
+                    );
+                }
+            }
+
+            ReactDOM.render( 
+                <React.Fragment>
+                    <MyComponent />
+                    <MyComponent />
+                </React.Fragment>,
+                document.getElementById( 'root' )
+            );
+        </script>
+    </body>
+</html>

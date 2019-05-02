@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- root element where all of React's output will go into-->
+        <div id="root"></div>
+
+        <!-- react core library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+
+        <!-- react dom library (renders components to the browser) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            class Parent extends React.Component {
+                // Phase 1 starts: Mounting phase methods
+                /*
+                constructor( props ) {
+                    super( props ); // this.props = props;
+
+                    console.log( 'Parent::constructor' );
+
+                    this.state = {
+                        x: 1
+                    };
+                }
+
+                componentWillMount() {
+                    console.log( 'Parent::componentWillMount (deprecated)' );
+                }
+
+                render() {
+                    console.log( 'Parent::render' );
+                    return (
+                        <div>
+                            props.p = {this.props.p} | state.x = {this.state.x}
+                        </div>
+                    );
+                }
+
+                componentDidMount() {
+                    console.log( 'Parent::componentDidMount' );
+                }
+                */
+                // Phase 1 ends: Mounting phase methods
+
+                // Phase 2 starts: Update phase methods
+                /*
+                componentWillReceiveProps( nextProps ) {
+                    console.log( 'Parent::componentWillReceiveProps' );
+                }
+
+                shouldComponentUpdate( nextProps, nextState ) {
+                    console.log( 'Parent::shouldComponentUpdate' );
+                    return true;
+                }
+
+                componentWillUpdate( nextProps, nextState ) {
+                    console.log( 'Parent::componentWillUpdate' );
+                }
+
+                // render() gets called
+
+                componentDidUpdate( prevProps, prevState ) {
+                    console.log( 'Parent::componentDidUpdate' )
+                }
+                */
+                // Phase 2 ends: Update phase methods
+
+                // Phase 3: Unmounting phase
+                /*
+                componentWillUnmount() {
+                    console.log( 'Parent::componentWillUnmount' );
+                }
+                */
+            }
+
+            ReactDOM.render( <Parent />, document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>

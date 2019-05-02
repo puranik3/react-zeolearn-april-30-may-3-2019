@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div id="root"></div>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            class LoginForm extends React.Component {
+                // @todo Setup state with value property (having form field values), and error property (with errors of form fields)
+                state = {
+                    values: {
+                        email: '',
+                        password: ''
+                    },
+                    error: {
+                        email: '',
+                        password: ''
+                    }
+                };
+
+                // @todo updateValues() accepts event object, sets values (while maintaining other parts of current state using spread operator), and calls checkValidity
+
+                // @todo checkValidity() checks validation rules and sets error part of state for all form fields
+
+                // @todo login() does form submission
+
+                render() {
+                    return (
+                        <div className="container my-5">
+                            <h1>Login</h1>
+                            <hr />
+                            <form>
+                                <div className="form-group row">
+                                    <label className="control-label col-3" htmlFor="email">Email</label>
+                                    <div className="col-9">
+                                        <input type="email" className="form-control" name="email" id="email" />
+                                        <div>@todo Error message (if exists)</div>
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <label className="control-label col-3" htmlFor="password">Password</label>
+                                    <div className="col-9">
+                                        <input type="password" className="form-control" name="password" id="password" />
+                                        <div>@todo Error message (if exists)</div>
+                                    </div>
+                                </div>
+                                <div className="form-group row">
+                                    <div className="offset-col-3 col-9">
+                                        @todo Button is to be disabled if form is in invalid state
+                                        <input type="submit" value="Login" className="btn btn-primary" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    );
+                }
+            }
+
+            ReactDOM.render( <LoginForm />, document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>
