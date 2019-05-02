@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 
 import { Product as ProductService } from '../services/Product';
 import Product from '../models/Product';
 
-// interface State {
-//     status: string,
-//     products: Array<Product> | null | []
-// }
+interface State {
+    status: string,
+    products: Array<Product>
+}
 
-class ProductList extends React.Component {
+class ProductList extends React.Component<RouteComponentProps<any>, State> {
     state = {
         status: 'INITIALIZING',
         products: []
@@ -42,18 +42,14 @@ class ProductList extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                this.state.products && this.state.products.map( product => {
-                                    if( product ) {
-                                        return <tr>
-                                            <td>
-                                                <Link to={{ pathname: "/catalog/" + product.id, state: product }}>{product && product.name}</Link>
-                                            </td>
-                                            <td>{product && product.price}</td>
-                                            <td>{product && product.starRating}</td>
-                                        </tr>;
-                                    } else {
-                                        return null;
-                                    }
+                                this.state.products && this.state.products.map( ( product : Product ) => {
+                                    return <tr>
+                                        <td>
+                                            <Link to={{ pathname: "/catalog/" + product.id, state: product }}>{product.name}</Link>
+                                        </td>
+                                        <td>{product.price}</td>
+                                        <td>{product.starRating}</td>
+                                    </tr>;
                                 })
                             }
                         </tbody>
