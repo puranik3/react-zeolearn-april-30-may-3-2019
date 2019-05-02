@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import About from './About';
 import ProductList from './ProductList';
+import PageNotFound from './PageNotFound';
 import { Link } from 'react-router-dom';
 
 export default function App( props : {} ) {
@@ -13,10 +14,13 @@ export default function App( props : {} ) {
                     <Link className="nav-item nav-link" to="/catalog">Catalog</Link>
                 </div>
             </nav>
-            <Switch>
-                <Route from="/" exact={true} component={About} />
-                <Route from="/catalog" component={ProductList} />
-            </Switch>
+            <div className="container">
+                <Switch>
+                    <Route from="/" exact={true} component={About} />
+                    <Route from="/catalog" component={ProductList} />
+                    <Route from="*" component={PageNotFound} />
+                </Switch>
+            </div>
         </React.Fragment>
     );
 }

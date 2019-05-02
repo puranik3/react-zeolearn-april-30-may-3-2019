@@ -30,7 +30,28 @@ class ProductList extends React.Component<{}, State> {
                     </div>
                 );
             case 'FETCHED':
-                return this.state.products.map( product => <div>{product.name}</div> );
+                return (
+                    <table className="table table-striped table-bordered my-3">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Rating</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                this.state.products.map( product => (
+                                    <tr>
+                                        <td>{product.name}</td>
+                                        <td>{product.price}</td>
+                                        <td>{product.starRating}</td>
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                );
             case 'FETCH_ERROR':
                 return (
                     <div className="alert alert-danger">
