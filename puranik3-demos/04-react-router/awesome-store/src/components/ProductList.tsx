@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Product as ProductService } from '../services/Product';
 import Product from '../models/Product';
@@ -43,7 +44,9 @@ class ProductList extends React.Component<{}, State> {
                             {
                                 this.state.products.map( product => (
                                     <tr>
-                                        <td>{product.name}</td>
+                                        <td>
+                                            <Link to={"/catalog/" + product.id}>{product.name}</Link>
+                                        </td>
                                         <td>{product.price}</td>
                                         <td>{product.starRating}</td>
                                     </tr>
