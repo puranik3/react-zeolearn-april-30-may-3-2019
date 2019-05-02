@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import Product from '../models/Product';
+import ReviewsList from './ReviewsList';
 import { Product as ProductService } from '../services/Product';
+import { Route, Link } from 'react-router-dom';
 
 interface State {
     status: string,
@@ -71,11 +73,11 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
                         
                         <nav className="nav nav-tabs nav-stacked">
                             {/* Tip: Pass in product id as state to linked component*/}
-                            <a className="nav-link active" href="">@todo Link to Reviews</a>
+                            <Link className="nav-link active" to={{ pathname: `${this.props.match.url}/reviews`, state: productId }}>@todo Link to Reviews</Link>
                             <a className="nav-link" href="">@todo Link to Post a Review</a>
                         </nav>
                         
-                        @todo Add Routes to both components
+                        <Route path={`${this.props.match.url}/reviews`} component={ReviewsList} />
                     </div>
                 );
                 break;
