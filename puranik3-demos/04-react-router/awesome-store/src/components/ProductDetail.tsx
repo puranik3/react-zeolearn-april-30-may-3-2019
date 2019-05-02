@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import Product from '../models/Product';
 import ReviewsList from './ReviewsList';
+import ReviewForm from './ReviewForm';
 import { Product as ProductService } from '../services/Product';
 import { Route, Link } from 'react-router-dom';
 
@@ -73,10 +74,11 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
                         <nav className="nav nav-tabs nav-stacked">
                             {/* Tip: Pass in product id as state to linked component*/}
                             <Link className="nav-link active" to={{ pathname: `${this.props.match.url}/reviews`, state: productId }}>Reviews</Link>
-                            <a className="nav-link" href="">Post a Review</a>
+                            <Link className="nav-link" to={{ pathname: `${this.props.match.url}/reviews/add `, state: productId }}>Post a Review</Link>
                         </nav>
                         
-                        <Route path={`${this.props.match.url}/reviews`} component={ReviewsList} />
+                        <Route path={`${this.props.match.url}/reviews`} exact component={ReviewsList} />
+                        <Route path={`${this.props.match.url}/reviews/add`} component={ReviewForm} />
                     </div>
                 );
                 break;
