@@ -42,7 +42,7 @@ class ProductList extends React.Component<RouteComponentProps<any>, State> {
                         </thead>
                         <tbody>
                             {
-                                this.state.products && this.state.products.map( ( product : Product ) => {
+                                this.state.products.map( ( product : Product ) => {
                                     return <tr>
                                         <td>
                                             <Link to={{ pathname: "/catalog/" + product.id, state: product }}>{product.name}</Link>

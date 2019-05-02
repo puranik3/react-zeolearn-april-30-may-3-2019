@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 import Product from '../models/Product';
+import { Product as ProductService } from '../services/Product';
 
 interface State {
     status: string,
@@ -17,7 +18,7 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
     render() {
 
         // @todo To be set from the URL param
-        const productId = 1;
+        const productId = this.props.match.params.id;
         
         // @todo To be set from state passed in location object
         const product = this.state.product;
@@ -91,12 +92,18 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
 
     async componentDidMount() {
         // @todo To be set from the URL param
-        // const productId;
+        const productId = this.props.match.params.id;
         
         // @todo To be set from state passed in location object
-        const product = this.props.location.state;
+        let product = this.props.location.state;
         
         if( product ) {
+            this.setState({
+                status: 'FETCHED_PRODUCT_DETAILS',
+                product: product
+            });
+        } else {
+            product = await ProductService.getProduct( productId );
             this.setState({
                 status: 'FETCHED_PRODUCT_DETAILS',
                 product: product

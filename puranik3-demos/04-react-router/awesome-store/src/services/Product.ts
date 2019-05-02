@@ -11,7 +11,7 @@ export const Product = {
             throw error; // let the caller handle it
         }
     },
-    getProduct( id : number ) {
+    async getProduct( id : number ) {
         
     }
 };
