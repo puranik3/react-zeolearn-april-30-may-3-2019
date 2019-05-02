@@ -13,7 +13,7 @@ export const Product = {
     },
     async getProduct( id : number ) {
         try {
-            const response = await axios.get( `https://awesome-store-server.herokuapp.com/products/
+            const response = await axios.get( `https://awesome-store-server.herokuapp.com/products/${id}
             ` );
             return response.data;
         } catch( error ) {

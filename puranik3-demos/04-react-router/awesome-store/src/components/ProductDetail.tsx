@@ -90,29 +90,24 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
         return el;
     }
 
-    async componentDidMount() {
-        // @todo To be set from the URL param
-        const productId = this.props.match.params.id;
-        
+    async componentDidMount() {        
         // @todo To be set from state passed in location object
         let product = this.props.location.state;
         
-        if( product ) {
-            this.setState({
-                status: 'FETCHED_PRODUCT_DETAILS',
-                product: product
-            });
-        } else {
-            product = await ProductService.getProduct( productId );
-            this.setState({
-                status: 'FETCHED_PRODUCT_DETAILS',
-                product: product
-            });
-        }
 
         // @todo
         // Case a) If product details are available, then set state, else...
         // Case b) We do an Ajax call and set states based on response
+        if( !product ) {
+            // @todo To be set from the URL param
+            const productId = this.props.match.params.id;
+            product = await ProductService.getProduct( productId )
+        }
+        
+        this.setState({
+            status: 'FETCHED_PRODUCT_DETAILS',
+            product: product
+        });
     }
 }
 
