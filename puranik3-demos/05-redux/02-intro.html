@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
+
+        <script type="text/babel">
+            // @todo action constants
+            const INCREMENT = 'INCREMENT', DECREMENT = 'DECREMENT';
+
+            // @todo action creators
+            const incrementAC = () => ({
+                type: INCREMENT
+            });
+            
+            const decrementAC = () => ({
+                type: DECREMENT
+            });
+
+            // @todo reducer(s)
+            // reducers MUST be "pure" functions
+            // 1. Cannot modify its arguments
+            // 2. Cannot use global state and methods
+            // 3. It should be predictable (same output for any given set of arguments passed)
+            const counterReducer = ( curState, action ) => {
+                let newState;
+
+                switch( action.type ) {
+                    case INCREMENT:
+                        newState = { ...curState, counter : curState.counter + 1 };
+                        // curState.counter++;
+                        // return curState;
+                        break;
+                    case DECREMENT:
+                        newState = { ...curState, counter : curState.counter - 1 };
+                        break;
+                    default:
+                        newState = curState;
+
+                }
+
+                return newState;
+            }
+
+            // @todo store
+            const store = Redux.createStore(
+                counterReducer, // reducer for the app
+                { // initial state
+                    counter: 0
+                }
+            );
+        
+            class Counter extends React.Component {
+                increment = () => {
+                    store.dispatch( incrementAC() );
+                }
+                
+                decrement = () => {
+                    store.dispatch( decrementAC() );
+                }
+
+                render() {
+                    return (
+                        <div>
+                            <p>{store.getState().counter}</p>
+                            <button onClick={this.increment}>+</button>
+                            <button onClick={this.decrement}>-</button>
+                        </div>
+                    );
+                }
+
+                // @todo Use componentDidMount to subscribe and force an update of the UI
+                componentDidMount() {
+                    store.subscribe( this.forceUpdate.bind( this ) );
+                }
+            }
+
+            ReactDOM.render( <Counter />, document.getElementById( 'root' ) );
+        </script>
+    </body>
+</html>
