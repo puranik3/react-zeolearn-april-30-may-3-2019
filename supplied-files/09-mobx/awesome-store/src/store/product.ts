@@ -1,0 +1,2 @@
+// @todo Define an exported ProductStore (we will create it as a class, but an object could also be created instead). The constructor accepts initial status
+// Have status and products as observables, and numberOfProducts as part of derived state

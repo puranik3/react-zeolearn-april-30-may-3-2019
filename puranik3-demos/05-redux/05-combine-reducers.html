@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="root"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            // action constants
+            const INCREMENT = 'INCREMENT', DECREMENT = 'DECREMENT', USERNAME_UPDATE = 'USERNAME_UPDATE';
+
+            // action creators
+            const incrementAC = () => ({
+                type: INCREMENT
+            });
+           
+            const decrementAC = () => ({
+                type: DECREMENT
+            });
+
+            const updateUsernameAC = ( value ) => ({
+                type: USERNAME_UPDATE,
+                payload: {
+                    value: value
+                }
+            });
+
+            const counterReducer = ( curState = 0, action ) => {
+                let newState;
+
+                switch( action.type ) {
+                    case INCREMENT:
+                        newState = curState + 1;
+                        break;
+                    case DECREMENT:
+                        newState = curState - 1;
+                        break;
+                    default:
+                        newState = curState;
+                }
+
+                return newState;
+            }
+
+            // @todo Define the form reducer
+
+
+            // @todo Create the store by combining reducers
+            
+
+            // "Presentational" component (takes in props and render UI)
+            function Counter( props ) {
+                const { increment, decrement, counter } = props;
+                
+                return (
+                    <div>
+                        <p>{counter}</p>
+                        <button onClick={increment}>+</button>
+                        <button onClick={decrement}>-</button>
+                    </div>
+                );
+            }
+
+            // "Container" component - manages state and state changes by dispatching actions
+            class CounterContainer extends React.Component {
+                increment = () => {
+                    store.dispatch( incrementAC() );
+                }
+                
+                decrement = () => {
+                    store.dispatch( decrementAC() );
+                }
+
+                render() {
+                    return <Counter increment={this.increment} decrement={this.decrement} counter={/* @todo Pass counter from state */} />;
+                }
+
+                componentDidMount() {
+                    store.subscribe( this.forceUpdate.bind( this ) )
+                }
+            }
+
+            function SomeForm( props ) {
+                return (
+                    <div>
+                        <input type="text" name="username" value={props.username} 
+                        onChange={props.updateUsername} />
+                        <br />
+                        Current username = {props.username}
+                    </div>
+                );
+            }
+
+            class SomeFormContainer extends React.Component {
+                updateUsername = ( event ) => {
+                    const value = event.target.value
+                    store.dispatch( updateUsernameAC( value ) );
+                }
+
+                render() {
+                    return <SomeForm updateUsername={this.updateUsername} />;
+                }
+
+                componentDidMount() {
+                    store.subscribe( this.forceUpdate.bind( this ) )
+                }
+            }
+
+            ReactDOM.render( 
+                <div>
+                    <CounterContainer />
+                    <SomeFormContainer />
+                </div>,
+                document.getElementById( 'root' )
+            );
+        </script>
+    </body>
+</html>

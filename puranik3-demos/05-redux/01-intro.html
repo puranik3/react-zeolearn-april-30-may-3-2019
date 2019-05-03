@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        Counter: <span id="counter"></span>
+        <button onclick="increment()">+</button>
+        <button onclick="decrement()">-</button>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.1/redux.min.js"></script>
+
+        <script>
+            // @todo action constants
+            const INCREMENT = 'INCREMENT', DECREMENT = 'DECREMENT';
+
+            // @todo action creators
+            const incrementAC = () => ({
+                type: INCREMENT
+            });
+            
+            const decrementAC = () => ({
+                type: DECREMENT
+            });
+
+            // @todo reducer(s)
+            // reducers MUST be "pure" functions
+            // 1. Cannot modify its arguments
+            // 2. Cannot use global state and methods
+            // 3. It should be predictable (same output for any given set of arguments passed)
+            const counterReducer = ( curState, action ) => {
+                let newState;
+
+                switch( action.type ) {
+                    case INCREMENT:
+                        newState = { ...curState, counter : curState.counter + 1 };
+                        // curState.counter++;
+                        // return curState;
+                        break;
+                    case DECREMENT:
+                        newState = { ...curState, counter : curState.counter - 1 };
+                        break;
+                    default:
+                        newState = curState;
+
+                }
+
+                return newState;
+            }
+
+            // @todo store
+            const store = Redux.createStore(
+                counterReducer, // reducer for the app
+                { // initial state
+                    counter: 0
+                }
+            );
+        
+            // @todo dispatch actions
+            const increment = () => {
+                store.dispatch( incrementAC() );
+            };
+            
+            const decrement = () => {
+                store.dispatch( decrementAC() );
+            };
+            
+            // @todo listen for state changes and render updated UI
+            function render() {
+                document.getElementById( 'counter' ).innerText = store.getState().counter;
+            }
+
+            render();
+            store.subscribe( render );
+        </script>
+    </body>
+</html>
