@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import getStore from './store/getStore';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const store = getStore( null );
+import store from './store';
 
 ReactDOM.render(
     <Provider store={store}>

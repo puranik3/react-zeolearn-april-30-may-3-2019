@@ -2,8 +2,6 @@ import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import Product from '../models/Product';
 
-import { fetchProductsThunk } from '../actions/creators';
-
 class ProductList extends React.Component<RouteComponentProps<any> & ReturnType<any> & { products : any, error : Error }, {}> {
     render() {
         const { products, error } = this.props;
@@ -63,7 +61,7 @@ class ProductList extends React.Component<RouteComponentProps<any> & ReturnType<
     }
 
     async componentDidMount() {
-        this.props.dispatch( fetchProductsThunk() );
+        this.props.fetchProducts();
     }
 }
 

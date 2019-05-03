@@ -16,6 +16,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/redux-thunk/2.3.0/redux-thunk.min.js"></script>
 
         <script type="text/babel">
             // action constants
@@ -44,6 +45,18 @@
                 }
             });
 
+            async function( x ) {
+                return function fetchQuestionsThunk( dispatch ) {
+                    dispatch( fetchingQuestionsAC() );
+
+                    try {
+                        const response = await axios.get( `https://api.stackexchange.com/2.0/questions?site=stackoverflow` );
+                        dispatch( fetchedQuestionsAC( response.data ) )
+                    } catch( error ) {
+                        dispatch( fetchQuestionsErroredAC( error ) )
+                    }
+                }
+            }
 
             // @todo Define thunk to fetch questions - The side effect is the Ajax call to fetch questions from 'https://api.stackexchange.com/2.0/questions?site=stackoverflow'
 
@@ -73,9 +86,18 @@
                 return newState;
             }
             
+            const logger1 = store => next => action => {
+                console.log( '[1]',  action );
+                next( action );
+            };
+            
+            const logger2 = store => next => action => {
+                console.log( '[2]', action );
+                next( action );
+            };
 
             // @todo Create the store and apply the thunk middleware (ReduxThunk.default)
-            const store = Redux.createStore( questionsReducer );
+            const store = Redux.createStore( questionsReducer, Redux.applyMiddleware( logger1, logger2, ReduxThunk.default ) );
             
             class QuestionList extends React.Component {
                 constructor( props ) {
@@ -131,15 +153,7 @@
                 async componentDidMount() {
                     store.subscribe( this.forceUpdate.bind( this ) );
 
-                    store.dispatch( fetchingQuestionsAC() );
-                    
-                    // @todo Dispatch thunk that initiates questions fetch
-                    try {
-                        const response = await axios.get( `https://api.stackexchange.com/2.0/questions?site=stackoverflow` );
-                        store.dispatch( fetchedQuestionsAC( response.data ) )
-                    } catch( error ) {
-                        store.dispatch( fetchQuestionsErroredAC( error ) )
-                    }
+                    store.dispatch( fetchQuestionsThunk( 123 ) ); // dispatch a function (thunk)
                 }
             }
 

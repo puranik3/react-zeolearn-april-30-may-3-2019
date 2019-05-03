@@ -9,7 +9,7 @@ const productsReducer = ( curState = { byId : {}, error : null }, action ) => {
 
     switch( action.type ) {
         case FETCH_PRODUCTS:
-            newState = { byId : {}, error : null };
+            newState = { byId : { }, error : null };
             break;
         case FETCHED_PRODUCTS:
             let rest = action.payload.products.reduce( 

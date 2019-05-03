@@ -11,18 +11,12 @@ const fetchProductsAC = () => ({
     type: FETCH_PRODUCTS
 });
 
-const fetchedProductsAC = ( products ) => ({
-    type: FETCHED_PRODUCTS,
-    payload: {
-        products
-    }
+const fetchedProductsAC = () => ({
+    type: FETCHED_PRODUCTS
 });
 
-const fetchProductsErroredAC = ( error ) => ({
-    type: FETCH_PRODUCTS_ERRORED,
-    payload: {
-        error
-    }
+const fetchProductsErroredAC = () => ({
+    type: FETCH_PRODUCTS_ERRORED
 });
 
 const fetchProductsThunk = () => async ( dispatch ) => {
@@ -37,6 +31,5 @@ const fetchProductsThunk = () => async ( dispatch ) => {
 }
 
 export {
-    fetchProductsAC,
     fetchProductsThunk
 };
