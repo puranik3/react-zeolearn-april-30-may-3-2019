@@ -6,7 +6,8 @@ Please refer the [project document for the problem statement for a project using
 
 ## Video recordings (May 2, 3)
 - [May 2 - building the app + miscellaneous topics like Error boundary, lifecycle methods, Immutable.js, defaultProps](https://s3.amazonaws.com/corporate-trainings/fmi/react-april-20-may-3-2019/may-2-2019.mp4)
-- [May 3](https://s3.amazonaws.com/corporate-trainings/fmi/react-april-20-may-3-2019/may-3-2019.mp4)
+- [May 3 - Morning session (Redux fundamentals)](https://s3.amazonaws.com/corporate-trainings/fmi/react-april-20-may-3-2019/may-3-2019-part-1.mp4)
+- [May 3 - Afternoon session](https://s3.amazonaws.com/corporate-trainings/fmi/react-april-20-may-3-2019/may-3-2019-part-1.mp4)
 
 ## About React
 React is a web front-end library used to create user interfaces, i.e. a view in MVC architecture. Originally created at Facebook, it is now a free and open-source framework maintained by Facebook, Instagram and some other individual developers and corporations. It is not a full- fledged Single Page Application (SPA) framework unlike Angular, and hence other libraries like React Router and Redux are required to build an SPA. Additionally, a module bundler like Webpack is usually used in a React application.  

@@ -15,7 +15,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
         
-        @todo Include axios and thunk scripts
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
 
         <script type="text/babel">
             // action constants
@@ -49,19 +49,41 @@
 
 
             // @todo Define the reducer
+            const questionsReducer = ( curState = { questions: [], error: null, status: LOADING }, action ) => {
+                let newState;
+
+                switch( action.type ) {
+                    case LOADING: 
+                        newState = { questions: [], error: null, status: LOADING };
+                        break;
+                    case FETCHING_QUESTIONS:
+                        newState = { ...curState, status: FETCHING_QUESTIONS };
+                        break;
+                    case FETCHED_QUESTIONS:
+                        newState = { ...curState, questions: action.payload.questions, status:FETCHED_QUESTIONS };
+                        break;
+                    case FETCH_QUESTIONS_ERRORED:
+                        newState = { ...curState, error: action.payload.error, status: FETCH_QUESTIONS_ERRORED };
+                        break;
+                    default:
+                        newState = curState;
+
+                }
+
+                return newState;
+            }
             
 
             // @todo Create the store and apply the thunk middleware (ReduxThunk.default)
-    
-
+            const store = Redux.createStore( questionsReducer );
             
             class QuestionList extends React.Component {
-                constructor(props) {
-                    super(props);
-                    
-                    // @todo Set loading state
-                }
-                
+                constructor( props ) {
+                    super( props );
+
+                    store.dispatch( loadingAC() );
+                }   
+
                 render() {
                     let el;
 
@@ -85,7 +107,7 @@
                                 <React.Fragment>
                                     <ul>
                                         {
-                                            store.getState().items.map(
+                                            store.getState().questions.items.map(
                                                 item => <li key={item.question_id}>
                                                     <a href={item.link}>{item.title}</a>
                                                 </li>
@@ -98,7 +120,7 @@
                         case FETCH_QUESTIONS_ERRORED:
                             el = (
                                 <div className="alert alert-danger">
-                                    Oops! Something went wrong while trying to fetch questions. ({this.state.error})
+                                    Oops! Something went wrong while trying to fetch questions. ()
                                 </div>
                             )
                     }
@@ -106,10 +128,18 @@
                     return <div className="container">{el}</div>;
                 }
 
-                componentDidMount() {
+                async componentDidMount() {
                     store.subscribe( this.forceUpdate.bind( this ) );
+
+                    store.dispatch( fetchingQuestionsAC() );
                     
                     // @todo Dispatch thunk that initiates questions fetch
+                    try {
+                        const response = await axios.get( `https://api.stackexchange.com/2.0/questions?site=stackoverflow` );
+                        store.dispatch( fetchedQuestionsAC( response.data ) )
+                    } catch( error ) {
+                        store.dispatch( fetchQuestionsErroredAC( error ) )
+                    }
                 }
             }
 
