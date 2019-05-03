@@ -76,17 +76,51 @@ Please refer the [Training Outline](./react-training-outline.pdf)
 - https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js
 - https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js
 
-## References
-- [Official documentation for React](https://reactjs.org/)
-- [React.js cheatsheet at devhints.io](https://devhints.io/react)
-- [Error Boundaries example](https://codepen.io/gaearon/pen/wqvxGa?editors=0010)
+## Further exploration
+
+### A learning roadmap
+- [This is a very extensive roadmap for further exploration. Too vast, but comprehensive - can be quite intimidating](https://github.com/adam-golab/react-developer-roadmap)
+
+### Courses on React
+- [List of courses on React](https://reactjs.org/community/courses.html)
+
+### Libraries
+- [React](https://reactjs.org/)
+- [React - Community resources and Support - includes references to tools](https://reactjs.org/community/support.html)
+- [Create React app](https://facebook.github.io/create-react-app/)
+- [React router](https://reacttraining.com/react-router/web/guides/quick-start)
+- [Redux](https://redux.js.org/)
+- [React Redux](http://react-redux.js.org)
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk) 
+- [Redux Saga Introduction](https://redux-saga.js.org/docs/introduction/BeginnerTutorial.html)
+- [Redux Thunk](https://github.com/reduxjs/redux-thunk)
+- [Quick introduction to Mobx](https://mobx.js.org/getting-started.html)
+- [Mobx](https://mobx.js.org/)
+- [Redux vs Mobx](https://www.youtube.com/watch?v=76FRrbY18Bs)
+- [Immutable JS](https://immutable-js.github.io/immutable-js/)
+- [Webpack - Step-by-step guide](https://webpack.js.org/guides)
+- [Resources on Webpack](https://github.com/webpack-contrib/awesome-webpack)
+- [Jest](https://jestjs.io/en/)
+- [Enzyme](https://airbnb.io/enzyme/)
+- [List of CSS in JS libraries for React](https://github.com/FormidableLabs/radium/tree/905227c122b1775775cf8d82c508cce4179cff08/docs/comparison)
+
+## JavaScript
 - [Promises - good article explaining its workings](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
-- [Axios - Promise based HTTP library](https://github.com/axios/axios)
+
+### React Router
+- [A practical introduction](https://auth0.com/blog/react-router-4-practical-tutorial/)
+
+### Redux
 - [Dan Abramov's article on Presentational + Container components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
-- [Avoiding errors due to export of everything within in TypeScript](https://blog.fullstacktraining.com/cannot-redeclare-block-scoped-variable-name/)
+- [Dan Abramov's free course on Redux (on Egghead) - Part 1](https://egghead.io/courses/getting-started-with-redux)
+- [Dan Abramov's free course on Redux (on Egghead) - Part 2](https://egghead.io/courses/building-react-applications-with-idiomatic-redux)
+
+### TypeScript with React
+- [React with TypeScript](https://github.com/sw-yx/react-typescript-cheatsheet)
+- [React with TypeScript](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet)
+- [Microsoft's starter kit for using TypeScript with react apps](https://github.com/Microsoft/TypeScript-React-Starter)
 
 ### Some options for form validations in React
 - [Article by Michael Ries](https://medium.com/code-monkey/client-side-form-validation-in-react-40e367de47ba)
 - [react-form-validator-core](https://www.npmjs.com/package/react-form-validator-core) which is inspired by [formsy-react](https://www.npmjs.com/package/formsy-react)
 - [Form validations for React-redux based projects](https://davidkpiano.github.io/react-redux-form/docs.html)
-- [React with TypeScript](https://github.com/sw-yx/react-typescript-cheatsheet)
