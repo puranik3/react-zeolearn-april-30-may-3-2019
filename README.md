@@ -1,8 +1,12 @@
 # react-zeolearn-april-30-may-3-2019
 React JS training material for training from [Zeolearn](https://www.zeolearn.com/)
 
-## Exercises
-Please refer the [exercises document for exercises given during the training sessions](./exercises.md)
+## Project
+Please refer the [project document for the problem statement for a project using React and Redux](./video-catalog-app-description.pdf)
+
+## Video recordings (May 2, 3)
+- [May 2 - building the app + miscellaneous topics like Error boundary, lifecycle methods, Immutable.js, defaultProps](https://s3.amazonaws.com/corporate-trainings/fmi/react-april-20-may-3-2019/may-2-2019.mp4)
+- [May 3](https://s3.amazonaws.com/corporate-trainings/fmi/react-april-20-may-3-2019/may-3-2019.mp4)
 
 ## About React
 React is a web front-end library used to create user interfaces, i.e. a view in MVC architecture. Originally created at Facebook, it is now a free and open-source framework maintained by Facebook, Instagram and some other individual developers and corporations. It is not a full- fledged Single Page Application (SPA) framework unlike Angular, and hence other libraries like React Router and Redux are required to build an SPA. Additionally, a module bundler like Webpack is usually used in a React application.  
@@ -78,11 +82,11 @@ Please refer the [Training Outline](./react-training-outline.pdf)
 - [Error Boundaries example](https://codepen.io/gaearon/pen/wqvxGa?editors=0010)
 - [Promises - good article explaining its workings](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-promise-27fc71e77261)
 - [Axios - Promise based HTTP library](https://github.com/axios/axios)
-- [Dan Abramov's article on Presentational + COntainer components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
+- [Dan Abramov's article on Presentational + Container components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
 - [Avoiding errors due to export of everything within in TypeScript](https://blog.fullstacktraining.com/cannot-redeclare-block-scoped-variable-name/)
 
 ### Some options for form validations in React
 - [Article by Michael Ries](https://medium.com/code-monkey/client-side-form-validation-in-react-40e367de47ba)
 - [react-form-validator-core](https://www.npmjs.com/package/react-form-validator-core) which is inspired by [formsy-react](https://www.npmjs.com/package/formsy-react)
-- [ Form validations for React-redux based projects](https://davidkpiano.github.io/react-redux-form/docs.html)
+- [Form validations for React-redux based projects](https://davidkpiano.github.io/react-redux-form/docs.html)
 - [React with TypeScript](https://github.com/sw-yx/react-typescript-cheatsheet)
