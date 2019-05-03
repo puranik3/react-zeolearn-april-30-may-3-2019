@@ -1,26 +1,33 @@
-import React, { Component, isValidElement } from 'react';
+import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router';
 
-class ReviewForm extends React.Component<RouteComponentProps, any> {
+import { Product as ProductService } from '../services/Product';
+import Review from '../models/Review';
+
+interface Props {
+    productId: number
+}
+
+class ReviewForm extends Component<RouteComponentProps & Props, any> {
     // @todo Define refs for input elements
-    nameRef : React.RefObject<HTMLInputElement> = React.createRef();
+    reviewerRef : React.RefObject<HTMLInputElement> = React.createRef();
     starRatingRef : React.RefObject<HTMLInputElement> = React.createRef();
     reviewRef : React.RefObject<HTMLTextAreaElement> = React.createRef();
     titleRef : React.RefObject<HTMLInputElement> = React.createRef();
 
-    constructor( props : RouteComponentProps ) {
+    constructor( props : RouteComponentProps & Props ) {
         super( props );
 
         // @todo State for form
         this.state = {
             values: {
-                name: 'John',
+                reviewer: 'John',
                 starRating: '',
                 title: '',
                 review: ''
             },
             errors: {
-                name: '',
+                reviewer: '',
                 starRating: '',
                 title: '',
                 review: ''
@@ -29,9 +36,9 @@ class ReviewForm extends React.Component<RouteComponentProps, any> {
     }
 
     isValid = () => {
-        const { name, starRating, title, review } = this.state.values;
+        const { reviewer, starRating, title, review } = this.state.values;
 
-        return name !== '' && starRating !== '' && title !== '' && review !== '';
+        return reviewer !== '' && starRating !== '' && title !== '' && review !== '';
     }
 
     updateValues = ( event : React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> ) => {
@@ -57,14 +64,14 @@ class ReviewForm extends React.Component<RouteComponentProps, any> {
     }
 
     checkValidity() {
-        const { name, starRating, title, review } = this.state.values;
+        const { reviewer, starRating, title, review } = this.state.values;
 
-        let nameError : string, titleError : string, starRatingError : string, reviewError : string;
+        let reviewerError : string, titleError : string, starRatingError : string, reviewError : string;
 
-        if( name === '' ) {
-            nameError = 'Name cannot be empty';
+        if( reviewer === '' ) {
+            reviewerError = 'Name cannot be empty';
         } else {
-            nameError = '';
+            reviewerError = '';
         }
         
         if( title === '' ) {
@@ -93,29 +100,32 @@ class ReviewForm extends React.Component<RouteComponentProps, any> {
                         title: titleError,
                         starRating: starRatingError,
                         review: reviewError,
-                        name: nameError
+                        reviewer: reviewerError
                     }
                 }
             }
         );
     }
 
-    postReview = ( event : React.FormEvent<HTMLFormElement> ) => {
+    postReview = async ( event : React.FormEvent<HTMLFormElement> ) => {
         // @todo Make an Ajax call to POST /products/:productId/reviews, passing in review details (this.state.values)
+        event.preventDefault();
+        
+        try {
+            const review = await ProductService.postReview( this.props.productId, this.state.values as Review );
+            this.props.history.push( `/catalog/${this.props.productId}` );
+        } catch( error ) {
+            alert( error.message );
+        }
     }
 
     render() {
         return (
-            <div className="container">
-                <div className="row">
-                    <h1>Post a review for this product</h1>
-                    <hr />
-                </div>
-                <form className="form-horizontal" role="form"onSubmit={this.postReview}>
+            <div className="my-3 p-2">
+                <form className="form-horizontal" onSubmit={this.postReview}>
                     <div className="form-group">
-                        <label htmlFor="name" className="control-label">Your name</label>
-                        <input type="text" id="name" name="name" className="form-control" ref={this.nameRef} value={this.state.values.name} onChange={this.updateValues} />
-                        <div>{this.state.values.name}</div>
+                        <label htmlFor="reviewer" className="control-label">Your name</label>
+                        <input type="text" id="reviewer" name="reviewer" className="form-control" ref={this.reviewerRef} value={this.state.values.reviewer} onChange={this.updateValues} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="starRating" className="control-label">Rating</label>

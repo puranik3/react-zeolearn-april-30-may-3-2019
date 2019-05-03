@@ -32,28 +32,32 @@ class ProductList extends React.Component<RouteComponentProps<any>, State> {
                 );
             case 'FETCHED':
                 return (
-                    <table className="table table-striped table-bordered my-3">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.products.map( ( product : Product ) => {
-                                    return <tr>
-                                        <td>
-                                            <Link to={{ pathname: "/catalog/" + product.id, state: product }}>{product.name}</Link>
-                                        </td>
-                                        <td>{product.price}</td>
-                                        <td>{product.starRating}</td>
-                                    </tr>;
-                                })
-                            }
-                        </tbody>
-                    </table>
+                    <React.Fragment>
+                        <h3>Catalog</h3>
+                        <hr />
+                        <table className="table table-striped table-bordered my-3">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    products.map( ( product : Product ) => {
+                                        return <tr>
+                                            <td>
+                                                <Link to={{ pathname: "/catalog/" + product.id, state: product }}>{product.name}</Link>
+                                            </td>
+                                            <td>{product.price}</td>
+                                            <td>{product.starRating}</td>
+                                        </tr>;
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </React.Fragment>
                 );
             case 'FETCH_ERROR':
                 return (
@@ -61,6 +65,8 @@ class ProductList extends React.Component<RouteComponentProps<any>, State> {
                         Some error occured.
                     </div>
                 );
+            default:
+                return null;
         }
     }
 

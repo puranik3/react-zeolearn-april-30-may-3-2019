@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Review from '../models/Review';
 
 export const Product = {
     async getProducts() {
@@ -25,6 +26,16 @@ export const Product = {
         try {
             const response = await axios.get( `https://awesome-store-server.herokuapp.com/products/${id}/reviews
             ` );
+            return response.data;
+        } catch( error ) {
+            console.log( 'Some error : ', error.message );
+            throw error; // let the caller handle it
+        }
+    },
+    async postReview( id : number, review : Review ) {
+        try {
+            const response = await axios.post( `https://awesome-store-server.herokuapp.com/products/${id}/reviews
+            `, review );
             return response.data;
         } catch( error ) {
             console.log( 'Some error : ', error.message );

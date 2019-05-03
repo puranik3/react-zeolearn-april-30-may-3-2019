@@ -9,7 +9,11 @@ interface State {
     status: string
 }
 
-class ReviewsList extends Component<RouteComponentProps<any>, State> {
+interface Props {
+    productId: number
+}
+
+class ReviewsList extends Component<RouteComponentProps<any> & Props, State> {
     state = {
         reviews: [],
         status: 'INITIALIZING'
@@ -23,11 +27,9 @@ class ReviewsList extends Component<RouteComponentProps<any>, State> {
                         {
                             this.state.reviews.map( ( review : Review ) => (
                                 <li className="list-group-item">
-                                    {review.reviewer}
-                                    <br />
-                                    {review.title}
-                                    <br />
-                                    {review.text}
+                                    <div><strong>{review.title}</strong></div>
+                                    <div><small>By <span className="font-italic">{review.reviewer}</span></small></div>
+                                    <div>{review.text}</div>
                                 </li>
                             ))
                         }
@@ -43,7 +45,7 @@ class ReviewsList extends Component<RouteComponentProps<any>, State> {
     }
 
     async componentDidMount() {
-        const reviews = await ProductService.getReviews( this.props.location.state );
+        const reviews = await ProductService.getReviews( this.props.productId );
 
         this.setState({
             status: 'FETCHED_REVIEWS',

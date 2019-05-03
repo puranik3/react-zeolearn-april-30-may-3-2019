@@ -4,7 +4,7 @@ import Product from '../models/Product';
 import ReviewsList from './ReviewsList';
 import ReviewForm from './ReviewForm';
 import { Product as ProductService } from '../services/Product';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 interface State {
     status: string,
@@ -18,10 +18,6 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
     };
 
     render() {
-
-        // @todo To be set from the URL param
-        const productId = this.props.match.params.id;
-        
         // @todo To be set from state passed in location object
         const product = this.state.product;
 
@@ -43,44 +39,50 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
                 );
                 break;
             case 'FETCHED_PRODUCT_DETAILS':
-                el = (
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-12">
-                                <h1>{product ? product.name : ''}</h1>
-                                <hr />
+                if( product ) {
+                    el = (
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-12">
+                                    <h1>{product ? product.name : ''}</h1>
+                                    <hr />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col">
+                                    <img src={product.imageUrl || ''} alt={product.description} className="img-fluid" />
+                                </div>
+                                <div className="col">
+                                    <p>
+                                        Product ID: {product.id}
+                                    </p>
+                                    <p>
+                                        {product.description}
+                                    </p>
+                                    <p className="mt-3">
+                                        Price: ${product.price}
+                                    </p>
+                                    <p>
+                                        Rating: {product.starRating} / 5
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <nav className="nav nav-tabs nav-stacked">
+                                {/* Tip: Pass in product id as state to linked component*/}
+                                <NavLink className="nav-link" activeClassName="active" exact to={this.props.match.url}>Reviews</NavLink>
+                                <NavLink className="nav-link" activeClassName="active" exact to={this.props.match.url + '/post-review'}>Post a Review</NavLink>
+                            </nav>
+                            
+                            <div className="my-3">
+                                <Route path={`${this.props.match.path}/post-review`} exact render={( props ) => <ReviewForm {...props} productId={product.id} />} />
+                                <Route path={this.props.match.path} exact render={( props ) => <ReviewsList {...props} productId={product.id} />} />
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col">
-                                <img src={product && product.imageUrl || ''} className="img-fluid" />
-                            </div>
-                            <div className="col">
-                                <p>
-                                    Product ID: {productId}
-                                </p>
-                                <p>
-                                    {product && product.description}
-                                </p>
-                                <p className="mt-3">
-                                    Price: ${product && product.price}
-                                </p>
-                                <p>
-                                    Rating: {product && product.starRating} / 5
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <nav className="nav nav-tabs nav-stacked">
-                            {/* Tip: Pass in product id as state to linked component*/}
-                            <Link className="nav-link active" to={{ pathname: `${this.props.match.url}/reviews`, state: productId }}>Reviews</Link>
-                            <Link className="nav-link" to={{ pathname: `${this.props.match.url}/reviews/add `, state: productId }}>Post a Review</Link>
-                        </nav>
-                        
-                        <Route path={`${this.props.match.url}/reviews`} exact component={ReviewsList} />
-                        <Route path={`${this.props.match.url}/reviews/add`} exact component={ReviewForm} />
-                    </div>
-                );
+                    );
+                } else {
+                    el = null;
+                }
                 break;
             case 'FETCH_ERROR_PRODUCT_DETAILS':
                 el = (
@@ -88,6 +90,9 @@ class ProductDetail extends Component<RouteComponentProps<any>, State> {
                         Some error occured.
                     </div>
                 );
+                break;
+            default:
+                el = null;
         }
 
         return el;
