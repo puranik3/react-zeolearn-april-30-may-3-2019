@@ -52,10 +52,33 @@
             }
 
             // @todo Define the form reducer
+            const formReducer = ( curState = '', action ) => {
+                let newState;
 
+                switch( action.type ) {
+                    case USERNAME_UPDATE:
+                        newState = action.payload.value;
+                        break;
+                    default:
+                        newState = curState;
+                }
+
+                return newState;
+            };
 
             // @todo Create the store by combining reducers
-            
+            const store = Redux.createStore(
+                Redux.combineReducers({
+                    counter: counterReducer,
+                    form: formReducer
+                })
+            );
+
+            // intial state
+            // {
+            //     counter: 0,
+            //     form: ''
+            // }
 
             // "Presentational" component (takes in props and render UI)
             function Counter( props ) {
@@ -81,7 +104,7 @@
                 }
 
                 render() {
-                    return <Counter increment={this.increment} decrement={this.decrement} counter={/* @todo Pass counter from state */} />;
+                    return <Counter increment={this.increment} decrement={this.decrement} counter={store.getState().counter} />;
                 }
 
                 componentDidMount() {
@@ -107,7 +130,7 @@
                 }
 
                 render() {
-                    return <SomeForm updateUsername={this.updateUsername} />;
+                    return <SomeForm updateUsername={this.updateUsername} username={store.getState().form} />;
                 }
 
                 componentDidMount() {
