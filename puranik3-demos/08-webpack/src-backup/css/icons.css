@@ -1,0 +1,22 @@
+.icon {
+    display: inline-block;
+    width: 24px;
+    height: 28px;
+    background-image: url( "../images/icon-sprite-18.jpg" );
+}
+
+.icon-twitter-blue {
+    background-position: -70px -150px;
+}
+
+.icon-twitter-blue:hover {
+    background-position: -70px -184px;
+}
+
+.icon-twitter-gray {
+    background-position: -70px -184px;
+}
+
+.icon-twitter-gray:hover {
+    background-position: -70px -150px;
+}
