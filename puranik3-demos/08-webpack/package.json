@@ -6,8 +6,7 @@
   "scripts": {
     "build": "webpack --watch",
     "build-prod": "webpack --config webpack.prod.config.js",
-    "serve": "webpack-dev-server",
-    "stats": "webpack --profile --json > dist/stats.json && webpack-bundle-analyzer dist/stats.json"
+    "serve": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",

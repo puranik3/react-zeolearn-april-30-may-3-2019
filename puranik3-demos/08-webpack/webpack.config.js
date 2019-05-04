@@ -5,18 +5,61 @@ const HtmlWebpackPlugin = require( 'html-webpack-plugin' );
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
-    // set up index (index.js and helpers.js) and admin (admin.js) entry points
-    
-    // set up output - set contenthash/hash on generated bundle
-    
-    // set up devServer (contentBase, writeToDisk, hot)
-    
-    // Set up optimization ({ splitChunks : { chunks : 'all' }, usedExports: true })
-    
-    // Set up babel-loader, style-loader, css-loader, file-loader (for  /\.(png|svg|jpg|gif)$/ and /\.(woff|woff2|eot|ttf|otf)$/), xml-loader
-
-    // Set CleanWebpackPlugin to clean up the dist folder
-    // Add HTMLWebPackPlugin (set title and template)
-    // Add BundleAnalyzerPlugin
-    // Add webpack.HotModuleReplacementPlugin
+    entry: {
+        "index": [
+            './src/index.js',
+            "./src/helpers.js"
+        ],
+        "admin": "./src/admin.js"
+    },
+    output: {
+        path: path.resolve( __dirname, 'dist' ),
+        filename: '[name].[hash:8].bundle.js'
+    },
+    devServer: {
+        contentBase: './dist',
+        writeToDisk: true,
+        hot: true
+    },
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        },
+        usedExports: true
+    },
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: 'babel-loader',
+                include: path.resolve( __dirname, 'src' )
+            },
+            {
+                test: /\.css$/,
+                use: [ 'style-loader', 'css-loader' ],
+                include: path.resolve( __dirname, 'src' )
+            },
+            {
+                use: 'file-loader',
+                test: /\.(png|svg|jpg|gif)$/
+            },
+            {
+                use: 'file-loader',
+                test: /\.(woff|woff2|eot|ttf|otf)$/
+            },
+            {
+                use: 'xml-loader',
+                test: /\.xml$/
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Webpack Demo App',
+            template: path.resolve( __dirname, 'src/index.html' )
+        }),
+        new BundleAnalyzerPlugin(),
+        new webpack.HotModuleReplacementPlugin()
+    ]
 };

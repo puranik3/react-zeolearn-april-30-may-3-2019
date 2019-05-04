@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- root element where all of React's output will go into-->
+        <div id="root"></div>
+
+        <!-- react core library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.6/umd/react.development.js"></script>
+
+        <!-- react dom library (renders components to the browser) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.6/umd/react-dom.development.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+        <script type="text/babel">
+            class List extends React.Component {
+                render() {
+                    return (
+                        <ul>
+                            { this.props.items.map( item => <li key={item}>{item}</li> ) }
+                        </ul>
+                    );
+                }
+            }
+
+            const items = [ 'Apples', 'Oranges', 'Bananas' ]
+            ReactDOM.render( <List items={items} />, document.getElementById( 'root' ) );
+
+            setTimeout(function() {
+                items.unshift( 'Strawberries' );
+                ReactDOM.render( <List items={items} />, document.getElementById( 'root' ) );
+            }, 10000)
+        </script>
+    </body>
+</html>

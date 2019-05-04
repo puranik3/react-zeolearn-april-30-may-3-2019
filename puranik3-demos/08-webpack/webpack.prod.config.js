@@ -17,8 +17,20 @@ module.exports = {
         path: path.resolve( __dirname, 'dist' ),
         filename: '[name].[contenthash:8].bundle.js'
     },
-    // set up babel loader
-    
-    // Set CleanWebpackPlugin to clean up the dist folder
-    // Add HTMLWebPackPlugin (set title and template)
+    module: {
+        rules: [
+            {
+                test: /\.jsx?$/,
+                use: 'babel-loader',
+                include: path.resolve( __dirname, 'src' )
+            }
+        ]
+    },
+    plugins: [
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'Webpack Demo App',
+            template: path.resolve( __dirname, 'src/index.html' )
+        })
+    ]
 };

@@ -1,22 +1,50 @@
-// @todo Mock the Questions service dependency
+jest.mock( './Questions.service.js' );
+import QuestionsService from './Questions.service.js';
+import QuestionList from './QuestionList';
+
+import React from 'react';
+import { shallow } from 'enzyme';
 
 describe( 'QuestionList', () => {
     it( 'loads with a fetched set of questions', () => {
-        // @todo Set the following as the mock resolved value of the QuestionsService.get() method
-        /*
         const response = [
             { title: 'How to pass data during routing?' },
             { title: 'Best way to handle errors in React' }
         ];
-        */
+        QuestionsService.get.mockResolvedValue( response );
         
-        // @todo Create a shallow wrapped QuestionsList instance
+        const wrapper = shallow( <QuestionList /> );
 
         // https://github.com/airbnb/enzyme/issues/964
-        // @todo Without using a setTimeout(), the state after shallow() call is the QUESTIONLIST_FETCH state. Hence check the wrapper state within a setTimeout() function
+        // without this the state after shallow() call is the QUESTIONLIST_FETCH state
+        setTimeout(() => { // setImmediate could also be used (maybe even process.nextTick())
+            expect( wrapper.state() ).toEqual({
+                questions: response,
+                error: null,
+                status: 'QUESTIONLIST_FETCH_SUCCESS'
+            });
+        }, 0);
+        //done();
     });
     
     it( 'ends up with a proper error state if QuestionsService.get() did not fetch questions due to some reason', () => {
-        // @todo Left as an exercise
+        const response = [
+            { title: 'How to pass data during routing?' },
+            { title: 'Best way to handle errors in React' }
+        ];
+        QuestionsService.get.mockResolvedValue( response );
+        
+        const wrapper = shallow( <QuestionList /> );
+
+        // https://github.com/airbnb/enzyme/issues/964
+        // without this the state after shallow() call is the QUESTIONLIST_FETCH state
+        setTimeout(() => { // setImmediate could also be used (maybe even process.nextTick())
+            expect( wrapper.state() ).toEqual({
+                questions: response,
+                error: null,
+                status: 'QUESTIONLIST_FETCH_SUCCESS'
+            });
+            done();
+        }, 0);
     });
 });
